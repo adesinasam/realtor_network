@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>{% block title %}{{ title | striptags }}{% endblock %}</title>
+      
+      <!-- Favicon -->
+      {% block favicon %}
+      <link rel="shortcut icon" href="{{ (favicon or '/assets/frappe/images/frappe-favicon.svg') | abs_url }}" type="image/x-icon">
+      <link href="{{ (favicon or '/assets/frappe/images/frappe-favicon.svg') | abs_url }}" rel="apple-touch-icon" sizes="180x180"/>
+      <link href="{{ (favicon or '/assets/frappe/images/frappe-favicon.svg') | abs_url }}" rel="icon" sizes="32x32" type="image/x-icon"/>
+      <link href="{{ (favicon or '/assets/frappe/images/frappe-favicon.svg') | abs_url }}" rel="icon" sizes="16x16" type="image/x-icon"/>
+      {% endblock %}
+      
+      <!-- Library / Plugin Css Build -->
+      <link rel="stylesheet" href="assets/realtor_network/dist/css/core/libs.min.css">
+      
+      <!-- Aos Animation Css -->
+      <link rel="stylesheet" href="assets/realtor_network/dist/vendor/aos/dist/aos.css">
+      
+      <!-- Hope Ui Design System Css -->
+      <link rel="stylesheet" href="assets/realtor_network/dist/css/hope-ui.min.css?v=4.0.0">
+      
+      <!-- Custom Css -->
+      <link rel="stylesheet" href="assets/realtor_network/dist/css/custom.min.css?v=4.0.0">
+      
+      <!-- Dark Css -->
+      <link rel="stylesheet" href="assets/realtor_network/dist/css/dark.min.css">
+      
+      <!-- Customizer Css -->
+      <link rel="stylesheet" href="assets/realtor_network/dist/css/customizer.min.css">
+      
+      <!-- RTL Css -->
+      <link rel="stylesheet" href="assets/realtor_network/dist/css/rtl.min.css">
+
+  <style>
+    /* Apply 90% zoom effect to the entire page */
+    body {
+      zoom: 0.9; /* Non-standard but works in Chrome/Edge */
+    }
+
+    /* Fallback for Firefox (which doesn't support 'zoom') */
+    @supports not (zoom: 1) {
+      html {
+        transform: scale(0.9);
+        transform-origin: 0 0;
+        width: 111.11%; /* Compensates for scaling */
+      }
+      body {
+        overflow-x: hidden; /* Prevents horizontal scroll */
+      }
+    }
+  </style>
+
+
+      <!-- FRAPPE RESOURCES HEAD -->
+      <script>
+        window.frappe = {};
+        frappe.ready_events = [];
+        frappe.ready = function(fn) {
+          frappe.ready_events.push(fn);
+        }
+        window.dev_server = {{ dev_server }};
+        window.socketio_port = {{ (frappe.socketio_port or 'null') }};
+      </script>
+      <!-- FRAPPE RESOURCES HEAD -->
+      
+      
+  </head>
+  <body class=" " data-bs-spy="scroll" data-bs-target="#elements-section" data-bs-offset="0" tabindex="0">
+    
+      <div class="wrapper">
+      <section class="login-content">
+         <div class="row m-0 align-items-center bg-white vh-100">            
+            <div class="col-md-3 d-md-block d-none bg-primary p-0 mt-n1 vh-100 overflow-hidden">
+               <img src="assets/realtor_network/dist/images/auth/05.png" class="img-fluid gradient-main animated-scaleX" alt="images">
+            </div>
+            <div class="col-md-9">               
+               <div class="row justify-content-center">
+                  <div class="col-md-10">
+                     <div class="card card-transparent auth-card shadow-none d-flex justify-content-center mb-0">
+                        <div class="card-body">
+                           <a href="" class="navbar-brand d-flex align-items-center mb-3">
+                
+                            <!--Logo start-->
+                            <div class="logo-main">
+                             <div class="logo-normal">
+                               <img src="{{ banner_image }}" style="width: 45px;">
+                             </div>                    
+                             <div class="logo-mini">
+                               <img src="{{ banner_image }}" style="width: 45px;">
+                             </div>                    
+                            </div>
+                            <!--logo End-->
+                
+                
+                
+                
+                            <h5 class="logo-title ms-3">FIPS Multilinks Ltd</h5>
+                           </a>
+                           <h3 class="mb-2 text-center">Register</h3>
+                           <p class="text-center">Create your Realtor account.</p>
+                           <form>
+                              <div class="row">
+                                 <div class="col-lg-4">
+                                    <div class="form-group">
+                                       <label for="full-name" class="form-label">Full Name</label>
+                                       <input type="text" class="form-control" id="full-name" placeholder=" ">
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-4">
+                                    <div class="form-group">
+                                       <label for="last-name" class="form-label">Last Name</label>
+                                       <input type="text" class="form-control" id="last-name" placeholder=" ">
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-4">
+                                    <div class="form-group">
+                                       <label for="email" class="form-label">Email</label>
+                                       <input type="email" class="form-control" id="email" placeholder=" ">
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-4">
+                                    <div class="form-group">
+                                       <label for="phone" class="form-label">Phone No.</label>
+                                       <input type="text" class="form-control" id="phone" placeholder=" ">
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-4">
+                                    <div class="form-group">
+                                       <label for="password" class="form-label">Password</label>
+                                       <input type="password" class="form-control" id="password" placeholder=" ">
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-4">
+                                    <div class="form-group">
+                                       <label for="confirm-password" class="form-label">Confirm Password</label>
+                                       <input type="text" class="form-control" id="confirm-password" placeholder=" ">
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-4">
+                                    <div class="form-group">
+                                       <label for="phone" class="form-label">Phone No.</label>
+                                       <input type="text" class="form-control" id="phone" placeholder=" ">
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-4">
+                                    <div class="form-group">
+                                       <label for="password" class="form-label">Password</label>
+                                       <input type="password" class="form-control" id="password" placeholder=" ">
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-4">
+                                    <div class="form-group">
+                                       <label for="confirm-password" class="form-label">Confirm Password</label>
+                                       <input type="text" class="form-control" id="confirm-password" placeholder=" ">
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-12 d-flex justify-content-center">
+                                    <div class="form-check mb-3">
+                                       <input type="checkbox" class="form-check-input" id="customCheck1">
+                                       <label class="form-check-label" for="customCheck1">I agree with the terms of use</label>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="d-flex justify-content-center">
+                                 <button type="submit" class="btn btn-primary">Sign Up</button>
+                              </div>
+                              <!-- <p class="text-center my-3">or sign in with other accounts?</p>
+                              <div class="d-flex justify-content-center">
+                                 <ul class="list-group list-group-horizontal list-group-flush">
+                                    <li class="list-group-item border-0 pb-0">
+                                       <a href="#"><img src="assets/realtor_network/dist/images/brands/fb.svg" alt="fb"></a>
+                                    </li>
+                                    <li class="list-group-item border-0 pb-0">
+                                       <a href="#"><img src="assets/realtor_network/dist/images/brands/gm.svg" alt="gm"></a>
+                                    </li>
+                                    <li class="list-group-item border-0 pb-0">
+                                       <a href="#"><img src="assets/realtor_network/dist/images/brands/im.svg" alt="im"></a>
+                                    </li>
+                                    <li class="list-group-item border-0 pb-0">
+                                       <a href="#"><img src="assets/realtor_network/dist/images/brands/li.svg" alt="li"></a>
+                                    </li>
+                                 </ul>
+                              </div> -->
+                              <p class="mt-3 text-center">
+                                 Already have an Account <a href="sign-in.html" class="text-underline">Sign In</a>
+                              </p>
+                           </form>
+                        </div>
+                     </div>    
+                  </div>
+               </div>           
+               <div class="sign-bg sign-bg-right">
+                  <svg width="280" height="230" viewBox="0 0 421 359" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <g opacity="0.05">
+                        <rect x="-15.0845" y="154.773" width="543" height="77.5714" rx="38.7857" transform="rotate(-45 -15.0845 154.773)" fill="#3A57E8"/>
+                        <rect x="149.47" y="319.328" width="543" height="77.5714" rx="38.7857" transform="rotate(-45 149.47 319.328)" fill="#3A57E8"/>
+                        <rect x="203.936" y="99.543" width="310.286" height="77.5714" rx="38.7857" transform="rotate(45 203.936 99.543)" fill="#3A57E8"/>
+                        <rect x="204.316" y="-229.172" width="543" height="77.5714" rx="38.7857" transform="rotate(45 204.316 -229.172)" fill="#3A57E8"/>
+                     </g>
+                  </svg>
+               </div>
+            </div>   
+         </div>
+      </section>
+      </div>
+    
+    <!-- Library Bundle Script -->
+    <script src="assets/realtor_network/dist/js/core/libs.min.js"></script>
+    
+    <!-- External Library Bundle Script -->
+    <script src="assets/realtor_network/dist/js/core/external.min.js"></script>
+    
+    <!-- Widgetchart Script -->
+    <script src="assets/realtor_network/dist/js/charts/widgetcharts.js"></script>
+    
+    <!-- mapchart Script -->
+    <script src="assets/realtor_network/dist/js/charts/vectore-chart.js"></script>
+    <script src="assets/realtor_network/dist/js/charts/dashboard.js" ></script>
+    
+    <!-- fslightbox Script -->
+    <script src="assets/realtor_network/dist/js/plugins/fslightbox.js"></script>
+    
+    <!-- Settings Script -->
+    <script src="assets/realtor_network/dist/js/plugins/setting.js"></script>
+    
+    <!-- Slider-tab Script -->
+    <script src="assets/realtor_network/dist/js/plugins/slider-tabs.js"></script>
+    
+    <!-- Form Wizard Script -->
+    <script src="assets/realtor_network/dist/js/plugins/form-wizard.js"></script>
+    
+    <!-- AOS Animation Plugin-->
+    <script src="assets/realtor_network/dist/vendor/aos/dist/aos.js"></script>
+    
+    <!-- App Script -->
+    <script src="assets/realtor_network/dist/js/hope-ui.js" defer></script>
+
+    <!-- frappe resources -->
+    <script>frappe.csrf_token = "{{frappe.session.csrf_token}}";</script>
+    <script>
+      window.csrf_token = '{{ frappe.session.csrf_token }}'
+    </script>
+
+  </body>
+</html>
