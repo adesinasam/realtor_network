@@ -32,6 +32,8 @@
       <!-- Customizer Css -->
       <link rel="stylesheet" href="assets/realtor_network/dist/css/customizer.min.css">
       
+      <!-- RTL Css -->
+      <link rel="stylesheet" href="assets/realtor_network/dist/css/rtl.min.css">
 
   <style>
     /* Apply 90% zoom effect to the entire page */
@@ -68,6 +70,13 @@
       
   </head>
   <body class="  ">
+    <!-- loader Start -->
+    <!-- <div id="loading">
+      <div class="loader simple-loader">
+          <div class="loader-body">
+          </div>
+      </div>    </div> -->
+    <!-- loader END -->
     
     {% block sidebar_link %}
     {% include "templates/includes/sidebar.html" %}
@@ -78,11 +87,13 @@
     {% include "templates/includes/nav.html" %}
     {% endblock %}
 
-      <div class="conatiner-fluid content-inner mt-n5 py-0">
+      <div class="container-fluid content-inner mt-n5 py-0">
 
     {% block content %}
     {% endblock %}
 
+    {% block social %}
+    {% endblock %}
       </div>
       <div class="btn-download">
           <a class="btn btn-success px-3 py-2" href="#" target="_blank" >

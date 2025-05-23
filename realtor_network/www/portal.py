@@ -21,6 +21,6 @@ def get_context(context):
     context.abbr = "".join([p[0] for p in parts[:2] if p])
 
     # nav
-    context.active_route = "dashboard"
+    context.active_route = "home"
 
     return context
