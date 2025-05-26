@@ -6,6 +6,14 @@ no_cache = 1
 
 def get_context(context):
 
+    docnames = frappe.form_dict.docname
+
+    if docnames:
+        docname = docnames
+        context.referral = frappe.get_doc("Sales Person", {"custom_referral_code": docname})
+    else:
+        docname = None
+
     # Fetch the current user's details
     current_user = frappe.get_doc("User", frappe.session.user)
     context.current_user = current_user
@@ -24,5 +32,8 @@ def get_context(context):
     context.active_route = "clients"
 
     context.realtor_settings = frappe.call('realtor_network.api.get_realtor_settings')
+
+    context.docname = docname
+
 
     return context

@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en" dir="ltr">
   <head>
@@ -69,31 +68,22 @@
       
       
   </head>
+
+    {% block bodynav_link %}
   <body class="  ">
-    <!-- loader Start -->
-    <!-- <div id="loading">
-      <div class="loader simple-loader">
-          <div class="loader-body">
-          </div>
-      </div>    </div> -->
-    <!-- loader END -->
     
-    {% block sidebar_link %}
     {% include "templates/includes/sidebar.html" %}
-    {% endblock %}
 
     <main class="main-content">
-    {% block headnav_link %}
     {% include "templates/includes/nav.html" %}
-    {% endblock %}
 
-      <div class="container-fluid content-inner mt-n5 py-0">
+    {% endblock %}
+  
 
     {% block content %}
     {% endblock %}
 
-    {% block social %}
-    {% endblock %}
+    {% block bodyfooter_link %}
       </div>
       <div class="btn-download">
           <a class="btn btn-success px-3 py-2" href="#" target="_blank" >
@@ -114,6 +104,8 @@
     </a>
     {% endif %}
     <!-- Wrapper End-->
+
+    {% endblock %}
 
     <!-- Library Bundle Script -->
     <script src="assets/realtor_network/dist/js/core/libs.min.js"></script>

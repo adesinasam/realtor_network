@@ -19,6 +19,15 @@ def validate_sales_person(doc, method):
         else:
             frappe.throw(_("Sales Person Name is required. Please set either First Name or Last Name"))
 
+    # Email validation
+    if doc.get("custom_email") or doc.get("custom_confirm_email"):
+        if not doc.get("custom_email"):
+            frappe.throw(_("Email is required when Confirm Email is set"))
+        if not doc.get("custom_confirm_email"):
+            frappe.throw(_("Please confirm your email address"))
+        if doc.custom_email.lower() != doc.custom_confirm_email.lower():
+            frappe.throw(_("Email addresses do not match. Please ensure both fields are identical."))
+
 def update_referral_and_name(doc, method):
     """Handle referral code and final naming after document is saved"""
     # Skip if this is a fresh install or during migration
@@ -34,18 +43,18 @@ def update_referral_and_name(doc, method):
             AND name != %s
         """, doc.name)
         
-        next_code = (last_code[0][0] or 10000) + 1
-        doc.custom_referral_code = str(next_code).zfill(5)
-    
-    # Build final name format
+        next_code = (last_code[0][0] or 110000) + 1
+        doc.custom_referral_code = str(next_code).zfill(6)
+
+    # Build final uppercase name format
     name_parts = []
     if doc.get("custom_first_name"):
-        name_parts.append(doc.custom_first_name.strip())
+        name_parts.append(doc.custom_first_name.upper().strip())
     if doc.get("custom_last_name"):
-        name_parts.append(doc.custom_last_name.strip())
+        name_parts.append(doc.custom_last_name.upper().strip())
     
     if not name_parts:
-        name_parts.append(doc.name.split(" - ")[0])
+        name_parts.append(doc.name.split(" - ")[0].upper().strip())
     
     full_name = " ".join(name_parts)
     new_name = f"{full_name} - {doc.custom_referral_code}" if doc.get("custom_referral_code") else full_name
@@ -54,49 +63,13 @@ def update_referral_and_name(doc, method):
     if doc.sales_person_name != new_name or doc.name != new_name:
         frappe.db.set_value("Sales Person", doc.name, {
             "custom_referral_code": doc.custom_referral_code,
-            "sales_person_name": new_name
+            "sales_person_name": new_name,
+            "custom_full_name": full_name
         })
         
         # Rename document if name changed
         if doc.name != new_name:
-            frappe.rename_doc("Sales Person", doc.name, new_name)
+            frappe.rename_doc("Sales Person", doc.name, new_name, force=True)
             frappe.db.commit()
             frappe.msgprint(_("Sales Person renamed to {0}").format(new_name))
 
-
-def before_save(doc, method):
-    """Hook to generate referral code and ensure proper sales person naming"""
-    
-    # 1. Generate ascending numeric referral code if not set
-    if not doc.custom_referral_code:
-        max_code = frappe.db.sql("""
-            SELECT MAX(CAST(custom_referral_code AS UNSIGNED))
-            FROM `tabSales Person`
-            WHERE custom_referral_code REGEXP '^[0-9]+$'
-        """)[0][0] or 10000  # Default starting number
-        
-        doc.custom_referral_code = str(max_code + 1).zfill(5)  # 4-digit format (e.g., "10001")
-    
-    # 2. Build the sales_person_name (mandatory field)
-    name_parts = []
-    if doc.custom_first_name:
-        name_parts.append(doc.custom_first_name)
-    if doc.custom_last_name:
-        name_parts.append(doc.custom_last_name)
-    
-    # Fallback names if no first/last name provided
-    if not name_parts:
-        if doc.name and doc.name != "New Sales Person":
-            name_parts.append(doc.name)
-        else:
-            name_parts.append(_("Sales Person"))
-    
-    # Combine with referral code if exists
-    if doc.custom_referral_code:
-        doc.sales_person_name = f"{' '.join(name_parts)} - {doc.custom_referral_code}"
-    else:
-        doc.sales_person_name = ' '.join(name_parts)
-    
-    # 3. Validation for mandatory fields
-    if not doc.sales_person_name:
-        frappe.throw(_("Sales Person Name is required"))
