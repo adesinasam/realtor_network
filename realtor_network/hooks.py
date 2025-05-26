@@ -43,6 +43,10 @@ app_license = "mit"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
+doctype_js = {
+    "Sales Person": "public/js/pages/sales_person.js"    
+    }
+
 # doctype_js = {"doctype" : "public/js/doctype.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
@@ -137,6 +141,12 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
+doc_events = {
+    "Sales Person": {
+        "validate": "realtor_network.realtor_network.sales_person.validate_sales_person",
+        "on_update": "realtor_network.realtor_network.sales_person.update_referral_and_name"
+    }
+}
 # doc_events = {
 # 	"*": {
 # 		"on_update": "method",
