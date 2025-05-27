@@ -67,6 +67,7 @@ doctype_js = {
 # role_home_page = {
 # 	"Role": "home_page"
 # }
+
 website_route_rules = [
     {"from_route": "/portal/<docname>", "to_route": "realtor/newrealtor"},
     {"from_route": "/realtor/newrealtor/<docname>", "to_route": "realtor/newrealtor"},
