@@ -71,7 +71,7 @@ doctype_js = {
 website_route_rules = [
     {"from_route": "/portal/<docname>", "to_route": "realtor/newrealtor"},
     {"from_route": "/realtor/newrealtor/<docname>", "to_route": "realtor/newrealtor"},
-    {"from_route": "/realtor/newrealtor", "to_route": "realtor/newrealtor"}
+    {"from_route": "/confirm_email/<docname>", "to_route": "confirm_email"}
 ]
 
 

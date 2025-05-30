@@ -26,10 +26,10 @@
                             <!--Logo start-->
                             <div class="logo-main">
                              <div class="logo-normal">
-                               <img src="{{ banner_image }}" style="width: 45px;">
+                               <img src="{{ realtor_settings.logo }}" style="width: 45px;">
                              </div>                    
                              <div class="logo-mini">
-                               <img src="{{ banner_image }}" style="width: 45px;">
+                               <img src="{{ realtor_settings.logo }}" style="width: 45px;">
                              </div>                    
                             </div>
                             <!--logo End-->
@@ -37,7 +37,7 @@
                 
                 
                 
-                            <h5 class="logo-title ms-3">FIPS Multilinks Ltd</h5>
+                            <h5 class="logo-title ms-3">{{realtor_settings.company_navbar}}</h5>
                            </a>
                            <h3 class="mb-2 text-center">Register</h3>
                            <p class="text-center">Create your Realtor account.</p>
@@ -47,77 +47,121 @@
                              <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                <path d="M5.94118 10.7474V20.7444C5.94118 21.0758 5.81103 21.3936 5.57937 21.628C5.3477 21.8623 5.0335 21.994 4.70588 21.994H2.23529C1.90767 21.994 1.59347 21.8623 1.36181 21.628C1.13015 21.3936 1 21.0758 1 20.7444V11.997C1 11.6656 1.13015 11.3477 1.36181 11.1134C1.59347 10.879 1.90767 10.7474 2.23529 10.7474H5.94118ZM5.94118 10.7474C7.25166 10.7474 8.50847 10.2207 9.43512 9.28334C10.3618 8.34594 10.8824 7.07456 10.8824 5.74887V4.49925C10.8824 3.83641 11.1426 3.20071 11.606 2.73201C12.0693 2.26331 12.6977 2 13.3529 2C14.0082 2 14.6366 2.26331 15.0999 2.73201C15.5632 3.20071 15.8235 3.83641 15.8235 4.49925V10.7474H19.5294C20.1847 10.7474 20.8131 11.0107 21.2764 11.4794C21.7397 11.9481 22 12.5838 22 13.2466L20.7647 19.4947C20.5871 20.2613 20.25 20.9196 19.8045 21.3704C19.3589 21.8211 18.8288 22.04 18.2941 21.994H9.64706C8.6642 21.994 7.72159 21.599 7.0266 20.896C6.33162 20.1929 5.94118 19.2394 5.94118 18.2451" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                              </svg>
-                             <strong>Welcome!</strong> You are being referred by {{ referral.name }}!
+                             <strong>Welcome!</strong> You are referred by {{ referral.name }}!
                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"> </button>
                             </div>
                            </div>
                            {% endif %}
-                           <form>
+                           <form action="/api/method/realtor_network.api.newrealtor_form" id="userForm" method="post">
+                              <input type="hidden" value="{{frappe.session.csrf_token}}" name="csrf_token">
+                              <input type="hidden" name="initial_url" value="{{ frappe.request.url }}">
+                              {% if docname %}
+                              <input type="hidden" name="upline" value="{{ referral.name }}">
+                              {% endif %}
                               <div class="row">
                                  <div class="col-lg-4">
-                                    <div class="form-group">
-                                       <label for="first-name" class="form-label">First Name</label>
-                                       <input type="text" class="form-control" id="first-name" placeholder=" ">
-                                    </div>
+                                    <div class="form-floating custom-form-floating form-group mb-3">
+                                       <input type="text" class="form-control" id="first-name" placeholder="Place Holder" name="first_name" required pattern="[A-Za-z ]+" title="Only letters allowed">
+                                       <label for="first-name">First Name *</label>
+                                    </div>                                    
+                                 </div>
+                                 <div class="col-lg-4">
+                                    <div class="form-floating custom-form-floating form-group mb-3">
+                                       <input type="text" class="form-control" id="lastname" placeholder="Place Holder" name="last_name" required pattern="[A-Za-z ]+" title="Only letters allowed">
+                                       <label for="lastname">Last Name *</label>
+                                    </div>                                    
+                                 </div>
+                                 <div class="col-lg-4">
+                                    <div class="form-floating custom-form-floating form-group mb-3">
+                                       <input type="text" class="form-control" id="phone" placeholder="Place Holder" name="phone" required pattern="[0-9+]{9,15}" title="9-15 digit phone number">
+                                       <label for="phone">Phone No. *</label>
+                                    </div>                                    
+                                 </div>
+                                 <div class="col-lg-4">
+                                    <div class="form-floating custom-form-floating form-group mb-3">
+                                       <input type="email" class="form-control" id="email" placeholder="Place Holder" name="email" required>
+                                       <label for="email">Email *</label>
+                                       <div class="invalid-feedback" id="email-match-error" style="display:none">
+                                         Emails do not match
+                                       </div>
+                                    </div>                                    
+                                 </div>
+                                 <div class="col-lg-4">
+                                    <div class="form-floating custom-form-floating form-group mb-3">
+                                       <input type="email" class="form-control" id="confirmemail" placeholder="Place Holder" name="confirm_email" required>
+                                       <label for="confirmemail">Confirm Email *</label>
+                                    </div>                                    
+                                 </div>
+                                 <div class="col-lg-4">
+                                    <div class="form-floating custom-form-floating form-group mb-3">
+                                       <input type="date" class="form-control" id="dob" placeholder="Place Holder" name="dob" max="{{ frappe.utils.getdate().strftime('%Y-%m-%d') }}">
+                                       <label for="dob">Date of Birth</label>
+                                    </div>                                    
+                                 </div>
+                                 <div class="col-lg-8">
+                                    <div class="form-floating custom-form-floating custom-form-floating-sm form-group mb-3">
+                                       <input type="text" class="form-control" id="address" placeholder="Place Holder" name="address">
+                                       <label for="address">Address</label>
+                                    </div>                                    
                                  </div>
                                  <div class="col-lg-4">
                                     <div class="form-group">
-                                       <label for="last-name" class="form-label">Last Name</label>
-                                       <input type="text" class="form-control" id="last-name" placeholder=" ">
+                                       <select class="form-select mb-3 shadow-none" name="gender">
+                                          <option selected disabled value=""> Select Gender</option>
+                                          <option value="Male">Male</option>
+                                          <option value="Female">Female</option>
+                                          <option value="Other">Other</option>
+                                       </select>
                                     </div>
                                  </div>
                                  <div class="col-lg-4">
-                                    <div class="form-group">
-                                       <label for="phone" class="form-label">Phone No.</label>
-                                       <input type="text" class="form-control" id="phone" placeholder=" ">
-                                    </div>
+                                    <div class="form-floating custom-form-floating custom-form-floating-sm form-group mb-3">
+                                       <input type="text" class="form-control" id="city" placeholder="Place Holder" name="city">
+                                       <label for="city">City</label>
+                                    </div>                                    
+                                 </div>
+                                 <div class="col-lg-4">
+                                    <div class="form-floating custom-form-floating custom-form-floating-sm form-group mb-3">
+                                       <input type="text" class="form-control" id="state" placeholder="Place Holder" name="state" pattern="[A-Za-z ]+" title="Only letters allowed">
+                                       <label for="state">State</label>
+                                    </div>                                    
                                  </div>
                                  <div class="col-lg-4">
                                     <div class="form-group">
-                                       <label for="email" class="form-label">Email</label>
-                                       <input type="email" class="form-control" id="email" placeholder=" ">
+                                       <select class="form-select mb-3 shadow-none" name="country" required>
+                                          <option selected disabled value=""> Select Country</option>
+                                          {% for country in countrys %}
+                                          <option value="{{ country.name }}">{{ country.name }}</option>
+                                          {% endfor %}
+                                       </select>
                                     </div>
                                  </div>
                                  <div class="col-lg-4">
-                                    <div class="form-group">
-                                       <label for="confirm-email" class="form-label">Confirm Email</label>
-                                       <input type="email" class="form-control" id="confirm-email" placeholder=" ">
-                                    </div>
+                                    <div class="form-floating custom-form-floating custom-form-floating-sm form-group mb-3">
+                                       <input type="text" class="form-control" id="accountname" placeholder="Place Holder" name="accountname">
+                                       <label for="accountname">Account Name</label>
+                                    </div>                                    
+                                 </div>
+                                 <div class="col-lg-4">
+                                    <div class="form-floating custom-form-floating custom-form-floating-sm form-group mb-3">
+                                       <input type="text" class="form-control" id="accountno" placeholder="Place Holder" name="accountno"  pattern="[0-9]{10}" title="Account number must be exactly 10 digits">
+                                       <label for="accountno">Account Number</label>
+                                    </div>                                    
                                  </div>
                                  <div class="col-lg-4">
                                     <div class="form-group">
-                                       <label for="password" class="form-label">Password</label>
-                                       <input type="password" class="form-control" id="password" placeholder=" ">
-                                    </div>
-                                 </div>
-                                 <div class="col-lg-4">
-                                    <div class="form-group">
-                                       <label for="confirm-password" class="form-label">Confirm Password</label>
-                                       <input type="text" class="form-control" id="confirm-password" placeholder=" ">
-                                    </div>
-                                 </div>
-                                 <div class="col-lg-4">
-                                    <div class="form-group">
-                                       <label for="phone" class="form-label">Phone No.</label>
-                                       <input type="text" class="form-control" id="phone" placeholder=" ">
-                                    </div>
-                                 </div>
-                                 <div class="col-lg-4">
-                                    <div class="form-group">
-                                       <label for="password" class="form-label">Password</label>
-                                       <input type="password" class="form-control" id="password" placeholder=" ">
-                                    </div>
-                                 </div>
-                                 <div class="col-lg-4">
-                                    <div class="form-group">
-                                       <label for="confirm-password" class="form-label">Confirm Password</label>
-                                       <input type="text" class="form-control" id="confirm-password" placeholder=" ">
+                                       <select class="form-select mb-3 shadow-none" name="bank">
+                                          <option  selected disabled value=""> Select Bank</option>
+                                          {% for bank in banks %}
+                                          <option value="{{ bank.name }}">{{ bank.name }}</option>
+                                          {% endfor %}
+                                       </select>
                                     </div>
                                  </div>
                                  <div class="col-lg-12 d-flex justify-content-center">
                                     <div class="form-check mb-3">
-                                       <input type="checkbox" class="form-check-input" id="customCheck1">
-                                       <label class="form-check-label" for="customCheck1">I agree with the terms of use</label>
+                                       <input type="checkbox" class="form-check-input" id="customCheck1" name="terms" value="1" required>
+                                       <label class="form-check-label" for="customCheck1">I agree with the <a  href="/terms-of-service" target="_blank">terms of use</a></label>
                                     </div>
                                  </div>
                               </div>
@@ -142,7 +186,7 @@
                                  </ul>
                               </div> -->
                               <p class="mt-3 text-center">
-                                 Already have an Account <a href="sign-in.html" class="text-underline">Sign In</a>
+                                 Already have an Account <a href="/login" class="text-underline">Sign In</a>
                               </p>
                            </form>
                         </div>
@@ -163,6 +207,8 @@
          </div>
       </section>
       </div>
+
+
 {% endblock %}
 
 {% block bodyfooter_link %}

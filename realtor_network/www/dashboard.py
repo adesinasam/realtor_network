@@ -6,6 +6,10 @@ no_cache = 1
 
 def get_context(context):
 
+    # login
+    if frappe.session.user == "Guest":
+        frappe.throw(_("You need to be logged in to access this page"), frappe.PermissionError)
+
     # Fetch the current user's details
     current_user = frappe.get_doc("User", frappe.session.user)
     context.current_user = current_user
@@ -19,6 +23,15 @@ def get_context(context):
 
     # Create the abbreviation by taking the first letter of each part
     context.abbr = "".join([p[0] for p in parts[:2] if p])
+
+    try:
+        realtor = frappe.get_doc("Sales Person", {"custom_user_id": current_user.name})
+        if realtor:
+            context.realtor = realtor
+    except Exception as e:
+        pass
+    else:
+        context.realtor = realtor
 
     # nav
     context.active_route = "dashboard"
