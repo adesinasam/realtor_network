@@ -10,6 +10,7 @@
   "logo",
   "portal_settings_section",
   "company_navbar",
+  "referral_note",
   "column_break_jtnf",
   "portal_url"
  ],
@@ -48,13 +49,18 @@
    "fieldtype": "Data",
    "label": "Portal URL",
    "placeholder": "https://example.com"
+  },
+  {
+   "fieldname": "referral_note",
+   "fieldtype": "Small Text",
+   "label": "Referral Share Link Note"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-05-30 09:37:02.523220",
+ "modified": "2025-05-31 10:13:54.430738",
  "modified_by": "Administrator",
  "module": "Realtor Network",
  "name": "Realtor Settings",
