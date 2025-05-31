@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"-K5jF_XVgb\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Realtor Network</span>\",\"col\":12}},{\"id\":\"vhVRim2HyL\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"2mSkEX4UaQ\",\"type\":\"card\",\"data\":{\"card_name\":\"Realtor\",\"col\":4}},{\"id\":\"a-1hDBd0oW\",\"type\":\"card\",\"data\":{\"card_name\":\"Settings\",\"col\":4}}]",
+ "content": "[{\"id\":\"-K5jF_XVgb\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Realtor Network</span>\",\"col\":12}},{\"id\":\"YsqBLn7tKM\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h5\\\"><b>PORTAL</b></span>\",\"col\":12}},{\"id\":\"plDprXB-h8\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Realtor Network Portal Page\",\"col\":3}},{\"id\":\"vhVRim2HyL\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"ZdE0QkzevQ\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h5\\\"><b>META</b></span>\",\"col\":12}},{\"id\":\"2mSkEX4UaQ\",\"type\":\"card\",\"data\":{\"card_name\":\"Realtor\",\"col\":4}},{\"id\":\"a-1hDBd0oW\",\"type\":\"card\",\"data\":{\"card_name\":\"Settings\",\"col\":4}}]",
  "creation": "2025-05-30 11:39:14.922969",
  "custom_blocks": [],
  "docstatus": 0,
@@ -52,7 +52,7 @@
    "type": "Link"
   }
  ],
- "modified": "2025-05-30 11:45:42.782558",
+ "modified": "2025-05-31 11:10:21.708943",
  "modified_by": "Administrator",
  "module": "Realtor Network",
  "name": "Realtor Network",
@@ -63,6 +63,14 @@
  "quick_lists": [],
  "roles": [],
  "sequence_id": 39.0,
- "shortcuts": [],
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Realtor Network Portal Page",
+   "type": "URL",
+   "url": "/portal"
+  }
+ ],
  "title": "Realtor Network"
 }

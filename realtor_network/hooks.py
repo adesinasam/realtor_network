@@ -11,18 +11,19 @@ app_license = "mit"
 # required_apps = []
 
 # Each item in the list will be shown as an app in the apps page
-# add_to_apps_screen = [
-# 	{
-# 		"name": "realtor_network",
-# 		"logo": "/assets/realtor_network/logo.png",
-# 		"title": "Realtor Network",
-# 		"route": "/realtor_network",
-# 		"has_permission": "realtor_network.api.permission.has_app_permission"
-# 	}
-# ]
+add_to_apps_screen = [
+	{
+		"name": "realtor_network",
+		"logo": "/assets/realtor_network/dist/images/logo.png",
+		"title": "Realtor",
+		"route": "/realtor"
+		# "has_permission": "realtor_network.api.permission.has_app_permission"
+	}
+]
 
 # Includes in <head>
 # ------------------
+fixtures = ["realtor_roles.json"]
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/realtor_network/css/realtor_network.css"
@@ -69,9 +70,13 @@ doctype_js = {
 # }
 
 website_route_rules = [
+    {"from_route": "/realtor", "to_route": "realtor/portal"},
+    {"from_route": "/portal", "to_route": "realtor/portal"},
+    {"from_route": "/realtor/<docname>", "to_route": "realtor/newrealtor"},
     {"from_route": "/portal/<docname>", "to_route": "realtor/newrealtor"},
     {"from_route": "/realtor/newrealtor/<docname>", "to_route": "realtor/newrealtor"},
-    {"from_route": "/confirm_email/<docname>", "to_route": "confirm_email"}
+    {"from_route": "/confirm_email/<docname>", "to_route": "realtor/confirm_email"},
+    {"from_route": "/realtor/confirm_email/<docname>", "to_route": "realtor/confirm_email"}
 ]
 
 

@@ -46,7 +46,7 @@ def newrealtor_form(first_name, last_name, phone, email, confirm_email, dob=None
         return error_response(initial_url, "Invalid email address format")
     if frappe.db.exists("Sales Person", {"custom_email": email}):
         return error_response(initial_url, "Email already registered")
-    if frappe.db.exists("User", {"email": email}):
+    if (frappe.db.exists("User", {"email": email}) and "Sales User" not in frappe.get_roles(email)):
         return error_response(initial_url, "Email already has a user account")
 
     try:
@@ -107,21 +107,22 @@ def newrealtor_form(first_name, last_name, phone, email, confirm_email, dob=None
         sales_person.insert(ignore_permissions=True)
         
         # Create Web User
-        user = frappe.new_doc("User")
-        user.update({
-            'email': email,
-            'first_name': first_name,
-            'last_name': last_name,
-            'phone': phone,
-            'send_welcome_email': 1,
-            'role_profile_name': 'Realtor',
-            'module_profile': None,
-            'user_type': 'Website User'
-        })
-        user.insert(ignore_permissions=True)
+        if "Sales User" not in frappe.get_roles(email):
+            user = frappe.new_doc("User")
+            user.update({
+                'email': email,
+                'first_name': first_name,
+                'last_name': last_name,
+                'phone': phone,
+                'send_welcome_email': 1,
+                'role_profile_name': 'Realtor',
+                'module_profile': None,
+                'user_type': 'Website User'
+            })
+            user.insert(ignore_permissions=True)
         
         # Update Sales Person with user ID
-        sales_person.custom_user_id = user.name
+        sales_person.custom_user_id = email
         sales_person.save(ignore_permissions=True)
         
         frappe.db.commit()
