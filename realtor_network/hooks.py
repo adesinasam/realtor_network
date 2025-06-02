@@ -72,7 +72,6 @@ doctype_js = {
 website_route_rules = [
     {"from_route": "/realtor", "to_route": "realtor/portal"},
     {"from_route": "/portal", "to_route": "realtor/portal"},
-    {"from_route": "/realtor/<docname>", "to_route": "realtor/newrealtor"},
     {"from_route": "/portal/<docname>", "to_route": "realtor/newrealtor"},
     {"from_route": "/realtor/newrealtor/<docname>", "to_route": "realtor/newrealtor"},
     {"from_route": "/confirm_email/<docname>", "to_route": "realtor/confirm_email"},
