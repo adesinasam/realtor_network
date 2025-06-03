@@ -14,15 +14,5 @@
     "desk_access": 1,
     "is_custom": 0,
     "disabled": 0
-  },
-  {
-    "doctype": "Role Profile",
-    "name": "Realtor",
-    "role_profile": "Realtor",
-    "roles": [
-      {
-        "role": "Realtor User"
-      }
-    ]
   }
 ]

@@ -171,5 +171,4 @@ def get_country():
 
 @frappe.whitelist(allow_guest=True)
 def get_bank():
-    bank = frappe.get_all('Bank', fields=['name'])
-    return bank
+    return frappe.get_all('Bank', filters={'custom_category': 2}, fields=['name'])

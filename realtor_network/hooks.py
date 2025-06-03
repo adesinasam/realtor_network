@@ -23,7 +23,11 @@ add_to_apps_screen = [
 
 # Includes in <head>
 # ------------------
-fixtures = ["realtor_roles.json"]
+fixtures = [
+    "Role",
+    "Role Profile",
+    "Custom Field"
+]
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/realtor_network/css/realtor_network.css"

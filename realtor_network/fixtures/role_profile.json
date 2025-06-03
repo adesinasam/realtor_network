@@ -1,0 +1,12 @@
+[
+  {
+    "doctype": "Role Profile",
+    "name": "Realtor",
+    "role_profile": "Realtor",
+    "roles": [
+      {
+        "role": "Realtor User"
+      }
+    ]
+  }
+]
