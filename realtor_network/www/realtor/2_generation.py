@@ -35,16 +35,16 @@ def get_context(context):
         context.realtor = None
 
     # nav
-    context.active_route = "1_generation"
+    context.active_route = "2_generation"
 
     context.realtor_settings = frappe.call('realtor_network.api.get_realtor_settings')
 
     if realtor:
         context.sales_persons = frappe.call('realtor_network.api.get_sales_person', 
-            custom_upline='custom_upline_1', 
+            custom_upline='custom_upline_2', 
             upline=realtor.name
             )
-        context.team1_countactive = frappe.db.count('Sales Person', filters={'custom_upline_1': realtor.name, 'enabled': 1})    
+        context.team1_countactive = frappe.db.count('Sales Person', filters={'custom_upline_2': realtor.name, 'enabled': 1})    
     else:
         context.team1_countactive = 0  # or set a default value if required
 

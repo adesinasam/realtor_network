@@ -100,7 +100,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="realtor/transactions">
+                                <a class="nav-link {% if active_route == 'transactions' %}active{% endif %}" href="realtor/transactions">
                                     <i class="icon">
                                         <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -113,7 +113,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="realtor/paid_commission">
+                                <a class="nav-link {% if active_route == 'paid_commission' %}active{% endif %}" href="realtor/paid_commission">
                                    <i class="icon">
                                         <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -126,7 +126,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="realtor/pending_commission">
+                                <a class="nav-link {% if active_route == 'pending_commission' %}active{% endif %}" href="realtor/pending_commission">
                                     <i class="icon">
                                         <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -161,7 +161,7 @@
                         </a>
                         <ul class="sub-nav collapse" id="sidebar-auth" data-bs-parent="#sidebar-menu">
                             <li class="nav-item">
-                                <a class="nav-link" href="realtor/1_generation">
+                                <a class="nav-link {% if active_route == '1_generation' %}active{% endif %}" href="realtor/1_generation">
                                     <i class="icon">
                                         <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -174,7 +174,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="realtor/2_generation">
+                                <a class="nav-link {% if active_route == '2_generation' %}active{% endif %}" href="realtor/2_generation">
                                     <i class="icon">
                                         <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>

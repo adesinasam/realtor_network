@@ -1,0 +1,59 @@
+{% extends "templates/layout.html" %}
+
+{%- block title -%}
+{{_("1st Generation")}}
+{%- endblock -%}
+
+
+{% block content %}
+<div class="conatiner-fluid content-inner mt-n5 py-0">
+   <div class="row">
+      <div class="col-sm-12">
+         <div class="card">
+            <div class="card-header d-flex justify-content-between">
+               <div class="header-title">
+                  <h5 class="card-title">2nd Generation Team Mates</h5>
+               </div>
+            </div>
+            <div class="card-body px-0">
+               <div class="table-responsive">
+                  <table id="user-list-table" class="table table-striped" role="grid" data-bs-toggle="data-table">
+                     <thead>
+                        <tr class="ligth">
+                           <th>Name</th>
+                           <th>Mobile No</th>
+                           <th>Email</th>
+                           <th>Commission</th>
+                           <th>Status</th>
+                           <th>Date of Reg</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        {% if sales_persons %}
+                         {% for sales_person in sales_persons %}
+                        <tr>
+                           <td>{{ sales_person.custom_full_name }}</td>
+                           <td>{{ sales_person.custom_mobile_no }}</td>
+                           <td>{{ sales_person.custom_email }}</td>
+                           <td align="center">{{ sales_person.custom_commission_upline_1 }}%</td>
+                           <td>
+                              {% if sales_person.enabled == 1 %}
+                              <span class="badge bg-success">Active</span>
+                              {% else %}
+                              <span class="badge bg-danger">Inactive</span>
+                              {% endif %}
+                           </td>
+                           <td>{{ frappe.format_date(sales_person.creation, "dd/MM/yyyy") }}</td>
+                        </tr>
+                         {% endfor %}
+                        {% endif %}
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}
+
