@@ -31,6 +31,7 @@
             <div class="sidebar-list">
                 <!-- Sidebar Menu Start -->
                 <ul class="navbar-nav iq-main-menu" id="sidebar-menu">
+                    {% if realtor %}
                     <li class="nav-item static-item">
                         <a class="nav-link static-item disabled" href="#" tabindex="-1">
                             <span class="default-icon">Dashboard</span>
@@ -65,7 +66,7 @@
                     <li><hr class="hr-horizontal"></li>
                     <li class="nav-item static-item">
                         <a class="nav-link static-item disabled" href="#" tabindex="-1">
-                            <span class="default-icon">Pages</span>
+                            <span class="default-icon">Activities</span>
                             <span class="mini-icon">-</span>
                         </a>
                     </li>
@@ -151,7 +152,7 @@
                                     <path d="M3.32156 13.5127C2.21752 13.7297 1.49225 14.1719 1.19139 14.8167C0.936203 15.3453 0.936203 15.9586 1.19139 16.4872C1.65163 17.4851 3.13531 17.8066 3.71195 17.8885C3.83104 17.9065 3.92595 17.8038 3.91342 17.6832C3.61883 14.9167 5.9621 13.6046 6.56918 13.3029C6.59425 13.2885 6.59962 13.2677 6.59694 13.2542C6.59515 13.2452 6.5853 13.2317 6.5656 13.2299C5.25294 13.2047 3.84358 13.3848 3.32156 13.5127Z" fill="currentColor"></path>
                                 </svg>
                             </i>
-                            <span class="item-name">Tier</span>
+                            <span class="item-name">Team Mates</span>
                             <i class="right-icon">
                                 <svg class="icon-18" xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -168,7 +169,7 @@
                                             </g>
                                         </svg>
                                     </i>
-                                    <i class="sidenav-mini-icon"> L </i>
+                                    <i class="sidenav-mini-icon"> F </i>
                                     <span class="item-name">1st Generation</span>
                                 </a>
                             </li>
@@ -181,21 +182,8 @@
                                             </g>
                                         </svg>
                                     </i>
-                                    <i class="sidenav-mini-icon"> R </i>
+                                    <i class="sidenav-mini-icon"> S </i>
                                     <span class="item-name">2nd Generation</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="realtor/3_generation">
-                                    <i class="icon">
-                                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
-                                            <g>
-                                            <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                                            </g>
-                                        </svg>
-                                    </i>
-                                    <i class="sidenav-mini-icon"> C </i>
-                                    <span class="item-name">3rd Generation</span>
                                 </a>
                             </li>
                         </ul>
@@ -326,13 +314,13 @@
                             <span class="item-name">Admin</span>
                         </a>
                     </li> -->
-                    <li><hr class="hr-horizontal"></li>
+                    <!-- <li><hr class="hr-horizontal"></li>
                     <li class="nav-item static-item">
                         <a class="nav-link static-item disabled" href="#" tabindex="-1">
                             <span class="default-icon">Personal</span>
                             <span class="mini-icon">-</span>
                         </a>
-                    </li>
+                    </li> -->
                      <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="/me">
                             <i class="icon">
@@ -585,8 +573,10 @@
                             <span class="item-name">Log Out</span>
                         </a>
                     </li>
+                    {% endif %}
                 </ul>
-                <!-- Sidebar Menu End -->        </div>
+                <!-- Sidebar Menu End -->        
+            </div>
         </div>
         <div class="sidebar-footer"></div>
     </aside>    

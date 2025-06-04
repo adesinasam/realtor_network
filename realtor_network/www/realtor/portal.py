@@ -26,17 +26,23 @@ def get_context(context):
 
     try:
         realtor = frappe.get_doc("Sales Person", {"custom_user_id": current_user.name})
-        if realtor:
-            context.realtor = realtor
     except Exception as e:
-        pass
-    else:
+        realtor = ''
+
+    if realtor:
         context.realtor = realtor
+    else:
+        context.realtor = None
 
     # nav
     context.active_route = "home"
 
     context.realtor_settings = frappe.call('realtor_network.api.get_realtor_settings')
+
+    if realtor:
+        context.team1_countactive = frappe.db.count('Sales Person', filters={'custom_upline_1': realtor.name, 'enabled': 1})    
+    else:
+        context.team1_countactive = 0  # or set a default value if required
 
 
     return context

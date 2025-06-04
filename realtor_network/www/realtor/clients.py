@@ -26,12 +26,13 @@ def get_context(context):
 
     try:
         realtor = frappe.get_doc("Sales Person", {"custom_user_id": current_user.name})
-        if realtor:
-            context.realtor = realtor
     except Exception as e:
-        pass
-    else:
+        realtor = ''
+
+    if realtor:
         context.realtor = realtor
+    else:
+        context.realtor = None
 
     # nav
     context.active_route = "clients"

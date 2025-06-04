@@ -172,3 +172,15 @@ def get_country():
 @frappe.whitelist(allow_guest=True)
 def get_bank():
     return frappe.get_all('Bank', filters={'custom_category': 2}, fields=['name'])
+
+@frappe.whitelist()
+def get_sales_person(custom_upline=None, upline=None):
+    filters = {}
+    if upline and custom_upline:
+        filters[custom_upline] = upline
+    return frappe.get_all(
+        'Sales Person', 
+        filters=filters, 
+        fields=['sales_person_name', 'name', 'enabled', 'custom_full_name', 'custom_mobile_no',
+        'creation', 'custom_email', 'custom_commission_upline_1', 'custom_commission_upline_2']
+        )
