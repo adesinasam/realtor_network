@@ -35,7 +35,7 @@ def get_context(context):
         context.realtor = None
 
     # nav
-    context.active_route = "clients"
+    context.active_route = "Clients"
 
     context.realtor_settings = frappe.call('realtor_network.api.get_realtor_settings')
 
