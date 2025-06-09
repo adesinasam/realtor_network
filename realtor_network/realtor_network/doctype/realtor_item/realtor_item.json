@@ -1,0 +1,223 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "naming_series:",
+ "creation": "2025-06-09 08:09:37.598888",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "realtor_item_name",
+  "published",
+  "column_break_sbcg",
+  "project",
+  "status",
+  "display_section",
+  "portal_image",
+  "website_image_alt",
+  "column_break_hglw",
+  "slide_show",
+  "thumbnail",
+  "section_break_17",
+  "project_location",
+  "short_description",
+  "column_break_uctw",
+  "detail_description",
+  "offers_section",
+  "offers"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming Series",
+   "no_copy": 1,
+   "options": "RLT-ITM-.####",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "realtor_item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Realtor Item Name",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "published",
+   "fieldtype": "Check",
+   "label": "Published"
+  },
+  {
+   "fieldname": "column_break_sbcg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "fieldname": "display_section",
+   "fieldtype": "Section Break",
+   "label": "Display Images"
+  },
+  {
+   "description": "Item Image (if not slideshow)",
+   "fieldname": "portal_image",
+   "fieldtype": "Attach Image",
+   "hidden": 1,
+   "in_preview": 1,
+   "label": "Portal Image",
+   "print_hide": 1
+  },
+  {
+   "description": "Image Alternative Text",
+   "fieldname": "website_image_alt",
+   "fieldtype": "Data",
+   "label": "Image Description"
+  },
+  {
+   "fieldname": "column_break_hglw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Show a slideshow at the top of the page",
+   "fieldname": "slide_show",
+   "fieldtype": "Link",
+   "label": "Slide Show",
+   "options": "Website Slideshow"
+  },
+  {
+   "fieldname": "thumbnail",
+   "fieldtype": "Data",
+   "label": "Thumbnail",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_17",
+   "fieldtype": "Section Break",
+   "label": "Display Information"
+  },
+  {
+   "fieldname": "project_location",
+   "fieldtype": "Data",
+   "label": "Project Location"
+  },
+  {
+   "description": "Short Description for List View",
+   "fieldname": "short_description",
+   "fieldtype": "Small Text",
+   "label": "Short Description"
+  },
+  {
+   "fieldname": "column_break_uctw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "detail_description",
+   "fieldtype": "Text Editor",
+   "label": "Detail Description"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "offers_section",
+   "fieldtype": "Section Break",
+   "label": "Offers"
+  },
+  {
+   "fieldname": "offers",
+   "fieldtype": "Table",
+   "label": "Offers to Display",
+   "options": "Website Offer"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Open\nOngoing\nCompleted\nCancelled"
+  }
+ ],
+ "grid_page_length": 50,
+ "image_field": "portal_image",
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "make_attachments_public": 1,
+ "modified": "2025-06-09 11:08:13.512675",
+ "modified_by": "Administrator",
+ "module": "Realtor Network",
+ "name": "Realtor Item",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Realtor Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Projects Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Stock User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "realtor_item_name,project",
+ "show_name_in_global_search": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "realtor_item_name",
+ "track_changes": 1
+}

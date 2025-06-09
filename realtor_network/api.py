@@ -184,3 +184,11 @@ def get_sales_person(custom_upline=None, upline=None):
         fields=['sales_person_name', 'name', 'enabled', 'custom_full_name', 'custom_mobile_no',
         'creation', 'custom_email', 'custom_commission_upline_1', 'custom_commission_upline_2']
         )
+
+@frappe.whitelist(allow_guest=True)
+def get_realtor_item():
+    return frappe.get_all(
+        'Realtor Item', 
+        filters={'published': 1}, 
+        fields=['name','realtor_item_name', 'status', 'portal_image', 'website_image_alt', 'thumbnail', 
+        'project_location', 'project', 'short_description'])

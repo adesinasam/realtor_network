@@ -44,5 +44,10 @@ def get_context(context):
     else:
         context.team1_countactive = 0  # or set a default value if required
 
+    try:
+        context.realtor_items = frappe.call('realtor_network.api.get_realtor_item')
+    except Exception as e:
+        context.realtor_items = ''
+
 
     return context
