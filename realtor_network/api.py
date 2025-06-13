@@ -190,5 +190,4 @@ def get_realtor_item():
     return frappe.get_all(
         'Realtor Item', 
         filters={'published': 1}, 
-        fields=['name','realtor_item_name', 'status', 'portal_image', 'website_image_alt', 'thumbnail', 
-        'project_location', 'project', 'short_description'])
+        fields=['*'])

@@ -1,0 +1,85 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-06-12 17:27:09.187300",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "sizeapartment",
+  "outright",
+  "deposit",
+  "is_plot",
+  "column_break_erkk",
+  "6_months",
+  "12_months",
+  "18_months"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "description": "E.g. 300sqm, 2 Bedroom Apartment etc",
+   "fieldname": "sizeapartment",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Size/Estate Type"
+  },
+  {
+   "columns": 2,
+   "fieldname": "outright",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Outright Purchase"
+  },
+  {
+   "columns": 2,
+   "fieldname": "deposit",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Initial Deposit"
+  },
+  {
+   "fieldname": "column_break_erkk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 2,
+   "fieldname": "6_months",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "6 months"
+  },
+  {
+   "columns": 2,
+   "fieldname": "12_months",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "12 months"
+  },
+  {
+   "columns": 2,
+   "fieldname": "18_months",
+   "fieldtype": "Data",
+   "label": "18 months"
+  },
+  {
+   "default": "0",
+   "description": "Check if this is land sales",
+   "fieldname": "is_plot",
+   "fieldtype": "Check",
+   "label": "Is Plot"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-06-12 19:29:22.494729",
+ "modified_by": "Administrator",
+ "module": "Realtor Network",
+ "name": "Realtor Item Size",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

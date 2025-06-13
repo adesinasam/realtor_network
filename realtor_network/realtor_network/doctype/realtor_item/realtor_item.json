@@ -21,8 +21,16 @@
   "section_break_17",
   "project_location",
   "short_description",
+  "project_title",
+  "neighborhood",
   "column_break_uctw",
   "detail_description",
+  "section_break_hbak",
+  "plotsapartment",
+  "section_break_cbor",
+  "infrastructure",
+  "column_break_shvw",
+  "features",
   "offers_section",
   "offers"
  ],
@@ -138,6 +146,44 @@
    "fieldtype": "Select",
    "label": "Status",
    "options": "Open\nOngoing\nCompleted\nCancelled"
+  },
+  {
+   "fieldname": "project_title",
+   "fieldtype": "Data",
+   "label": "Title"
+  },
+  {
+   "fieldname": "neighborhood",
+   "fieldtype": "Small Text",
+   "label": "Landmark/Neighborhood"
+  },
+  {
+   "fieldname": "section_break_hbak",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "plotsapartment",
+   "fieldtype": "Table",
+   "label": "Plots/Apartment",
+   "options": "Realtor Item Size"
+  },
+  {
+   "fieldname": "section_break_cbor",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "infrastructure",
+   "fieldtype": "Small Text",
+   "label": "Infrastructure"
+  },
+  {
+   "fieldname": "column_break_shvw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "features",
+   "fieldtype": "Small Text",
+   "label": "Features"
   }
  ],
  "grid_page_length": 50,
@@ -145,7 +191,7 @@
  "index_web_pages_for_search": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2025-06-09 11:08:13.512675",
+ "modified": "2025-06-13 06:14:03.497464",
  "modified_by": "Administrator",
  "module": "Realtor Network",
  "name": "Realtor Item",
