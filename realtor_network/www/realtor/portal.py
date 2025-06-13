@@ -4,6 +4,12 @@ from frappe.website.utils import get_home_page
 
 no_cache = 1
 
+def get_plotsapartment(realtor_item):
+    realtor_item = frappe.get_doc("Realtor Item", realtor_item)
+    realtor_item_size = realtor_item.get("plotsapartment")
+
+    return realtor_item_size
+
 def get_context(context):
 
     # login
@@ -46,8 +52,13 @@ def get_context(context):
 
     try:
         context.realtor_items = frappe.call('realtor_network.api.get_realtor_item')
+        realtor_items = context.realtor_items
     except Exception as e:
         context.realtor_items = ''
+        realtor_items = ''
+
+    if realtor_items:
+        context['get_plotsapartment'] = get_plotsapartment
 
 
     return context
