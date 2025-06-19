@@ -191,3 +191,43 @@ def get_realtor_item():
         'Realtor Item', 
         filters={'published': 1}, 
         fields=['*'])
+
+
+@frappe.whitelist()
+def create_user_for_sales_person(sales_person_name):
+    try:
+        sales_person = frappe.get_doc("Sales Person", sales_person_name)
+        
+        if sales_person.user_id:
+            return {"message": _("User already exists for this Sales Person")}
+        
+        # Get email from sales person (you might need to adjust this based on your doctype fields)
+        email = sales_person.email or f"{sales_person.name}@example.com"
+        first_name = sales_person.sales_person_name
+        phone = sales_person.phone or ""
+        
+        # Create Web User
+        user = frappe.new_doc("User")
+        user.update({
+            'email': email,
+            'first_name': first_name,
+            'phone': phone,
+            'send_welcome_email': 0,
+            'role_profile_name': 'Realtor',
+            'module_profile': None,
+            'user_type': 'Website User'
+        })
+        user.insert(ignore_permissions=True)
+        
+        # Update Sales Person with user ID
+        sales_person.user_id = email
+        sales_person.save(ignore_permissions=True)
+        
+        frappe.db.commit()
+        
+        return {"message": _("User created successfully")}
+    
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), _("Error creating user for Sales Person"))
+        frappe.db.rollback()
+        return {"error": str(e)}
