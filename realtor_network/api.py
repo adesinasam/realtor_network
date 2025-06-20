@@ -194,7 +194,7 @@ def get_realtor_item():
 
 
 @frappe.whitelist()
-def create_user_for_sales_person(sales_person_name=None, batch_size=400):
+def create_user_for_sales_person(sales_person_name=None, batch_size=500):
     try:
         if sales_person_name:
             # Single user creation mode
@@ -226,7 +226,7 @@ def create_single_user(sales_person_name):
         "user_id": user.name
     }
 
-def create_users_in_batch(batch_size=400):
+def create_users_in_batch(batch_size=500):
     # Get all Sales Persons without users
     sales_persons = frappe.get_all("Sales Person",
         filters={"custom_user_id": ["in", ["", None]]},
