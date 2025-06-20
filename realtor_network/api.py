@@ -1,5 +1,6 @@
 
 import json
+import time
 
 import frappe
 from frappe import _
@@ -9,6 +10,8 @@ from frappe.model.mapper import get_mapped_doc
 from frappe.utils import cstr, flt, getdate, nowdate
 from frappe.utils.dateutils import get_dates_from_timegrain
 from datetime import datetime
+from frappe.utils import random_string, getdate
+from frappe.utils.password import get_decrypted_password
 
 
 @frappe.whitelist()
@@ -193,44 +196,77 @@ def get_realtor_item():
         fields=['*'])
 
 
-@frappe.whitelist()
-def create_user_for_sales_person(sales_person_name=None, batch_size=100, delay=0.5):
-    try:
-        if sales_person_name:
-            # Single user creation mode
-            return create_single_user(sales_person_name)
-        else:
-            # Batch creation mode
-            return create_users_in_batch(batch_size)
+# @frappe.whitelist()
+# def create_user_for_sales_person(sales_person_name=None, batch_size=100, delay=0.5):
+#     try:
+#         if sales_person_name:
+#             # Single user creation mode
+#             return create_single_user(sales_person_name)
+#         else:
+#             # Batch creation mode
+#             return create_users_in_batch(batch_size)
             
-    except Exception as e:
-        frappe.log_error(frappe.get_traceback(), _("Error creating user for Sales Person"))
-        frappe.db.rollback()
-        return {"error": str(e)}
+#     except Exception as e:
+#         frappe.log_error(frappe.get_traceback(), _("Error creating user for Sales Person"))
+#         frappe.db.rollback()
+#         return {"error": str(e)}
 
-def create_single_user(sales_person_name):
-    sales_person = frappe.get_doc("Sales Person", sales_person_name)
+# def create_single_user(sales_person_name):
+#     sales_person = frappe.get_doc("Sales Person", sales_person_name)
     
-    if sales_person.custom_user_id:
-        return {"message": _("User already exists for this Sales Person")}
+#     if sales_person.custom_user_id:
+#         return {"message": _("User already exists for this Sales Person")}
     
-    user = create_user_from_sales_person(sales_person)
+#     user = create_user_from_sales_person(sales_person)
     
-    # Update Sales Person with user ID
-    sales_person.custom_user_id = user.name
-    sales_person.save(ignore_permissions=True)
-    frappe.db.commit()
+#     # Update Sales Person with user ID
+#     sales_person.custom_user_id = user.name
+#     sales_person.save(ignore_permissions=True)
+#     frappe.db.commit()
     
-    return {
-        "message": _("User created successfully"),
-        "user_id": user.name
-    }
+#     return {
+#         "message": _("User created successfully"),
+#         "user_id": user.name
+#     }
 
-# def create_users_in_batch(batch_size=100):
-#     # Get all Sales Persons without users
+# # def create_users_in_batch(batch_size=100):
+# #     # Get all Sales Persons without users
+# #     sales_persons = frappe.get_all("Sales Person",
+# #         filters={"custom_user_id": ["in", ["", None]]},
+# #         fields=["name", "custom_email", "custom_first_name", "custom_mobile_no", "custom_referral_code"],
+# #         limit=batch_size
+# #     )
+    
+# #     created_count = 0
+# #     skipped_count = 0
+# #     errors = []
+    
+# #     for sp in sales_persons:
+# #         try:
+# #             sales_person_doc = frappe.get_doc("Sales Person", sp.name)
+# #             user = create_user_from_sales_person(sales_person_doc)
+            
+# #             sales_person_doc.custom_user_id = user.name
+# #             sales_person_doc.save(ignore_permissions=True)
+# #             created_count += 1
+# #         except Exception as e:
+# #             skipped_count += 1
+# #             errors.append(f"Sales Person {sp.name}: {str(e)}")
+# #             frappe.log_error(title=f"Failed to create user for {sp.name}")
+    
+# #     frappe.db.commit()
+    
+# #     return {
+# #         "message": _("Batch user creation completed"),
+# #         "created": created_count,
+# #         "skipped": skipped_count,
+# #         "errors": errors if errors else None
+# #     }
+
+# def create_users_in_batch(batch_size=100, delay=0.5):
 #     sales_persons = frappe.get_all("Sales Person",
 #         filters={"custom_user_id": ["in", ["", None]]},
-#         fields=["name", "custom_email", "custom_first_name", "custom_mobile_no", "custom_referral_code"],
+#         fields=["name"],
 #         limit=batch_size
 #     )
     
@@ -238,14 +274,18 @@ def create_single_user(sales_person_name):
 #     skipped_count = 0
 #     errors = []
     
-#     for sp in sales_persons:
+#     for i, sp in enumerate(sales_persons):
 #         try:
-#             sales_person_doc = frappe.get_doc("Sales Person", sp.name)
-#             user = create_user_from_sales_person(sales_person_doc)
-            
-#             sales_person_doc.custom_user_id = user.name
-#             sales_person_doc.save(ignore_permissions=True)
-#             created_count += 1
+#             # Add delay between iterations to prevent throttling
+#             if i > 0 and delay > 0:
+#                 time.sleep(delay)
+                
+#             result = create_single_user(sp.name)
+#             if result.get("message"):
+#                 created_count += 1
+#             else:
+#                 skipped_count += 1
+                
 #         except Exception as e:
 #             skipped_count += 1
 #             errors.append(f"Sales Person {sp.name}: {str(e)}")
@@ -260,7 +300,96 @@ def create_single_user(sales_person_name):
 #         "errors": errors if errors else None
 #     }
 
-def create_users_in_batch(batch_size=100, delay=0.5):
+# def create_user_from_sales_person(sales_person):
+#     email = sales_person.custom_email or f"{sales_person.name}@example.com"
+#     first_name = sales_person.custom_first_name or sales_person.name
+#     phone = sales_person.custom_mobile_no or ""
+#     username = sales_person.custom_referral_code or frappe.generate_hash(length=8).lower()
+    
+#     if frappe.db.exists("User", email):
+#         frappe.throw(_("User with email {0} already exists").format(email))
+    
+#     user = frappe.new_doc("User")
+#     user.update({
+#         'email': email,
+#         'first_name': first_name,
+#         'username': username,
+#         'phone': phone,
+#         'send_welcome_email': 0,
+#         'role_profile_name': 'Realtor',
+#         'module_profile': None,
+#         'user_type': 'Website User'
+#     })
+#     user.insert(ignore_permissions=True)
+    
+#     return user
+
+
+
+@frappe.whitelist()
+def create_user_for_sales_person(sales_person_name=None, batch_size=100, delay=0.1):
+    try:
+        if sales_person_name:
+            return create_single_user(sales_person_name)
+        else:
+            return create_users_in_batch(batch_size, delay)
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), _("Error creating user for Sales Person"))
+        frappe.db.rollback()
+        return {"error": str(e)}
+
+def create_single_user(sales_person_name):
+    sales_person = frappe.get_doc("Sales Person", sales_person_name)
+    
+    if sales_person.custom_user_id:
+        return {"message": _("User already exists for this Sales Person")}
+    
+    user_data = prepare_user_data(sales_person)
+    
+    # Direct DB insert
+    user_id = frappe.db.sql("""
+        INSERT INTO `tabUser` 
+        (`name`, `email`, `first_name`, `username`, `phone`, `send_welcome_email`, 
+         `role_profile_name`, `user_type`, `creation`, `modified`, `modified_by`, `owner`)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, [
+        user_data['email'],
+        user_data['email'],
+        user_data['first_name'],
+        user_data['username'],
+        user_data['phone'],
+        0,
+        'Realtor',
+        'Website User',
+        frappe.utils.now(),
+        frappe.utils.now(),
+        frappe.session.user,
+        frappe.session.user
+    ])
+    
+    # Add role directly
+    frappe.db.sql("""
+        INSERT INTO `tabHas Role` 
+        (`name`, `parent`, `parentfield`, `parenttype`, `role`, `modified_by`, `owner`)
+        VALUES (%s, %s, 'roles', 'User', 'Realtor', %s, %s)
+    """, [
+        frappe.generate_hash(length=10),
+        user_data['email'],
+        frappe.session.user,
+        frappe.session.user
+    ])
+    
+    # Update sales person
+    frappe.db.set_value("Sales Person", sales_person.name, "custom_user_id", user_data['email'])
+    
+    frappe.db.commit()
+    
+    return {
+        "message": _("User created successfully"),
+        "user_id": user_data['email']
+    }
+
+def create_users_in_batch(batch_size=100, delay=0.1):
     sales_persons = frappe.get_all("Sales Person",
         filters={"custom_user_id": ["in", ["", None]]},
         fields=["name"],
@@ -273,7 +402,6 @@ def create_users_in_batch(batch_size=100, delay=0.5):
     
     for i, sp in enumerate(sales_persons):
         try:
-            # Add delay between iterations to prevent throttling
             if i > 0 and delay > 0:
                 time.sleep(delay)
                 
@@ -297,7 +425,7 @@ def create_users_in_batch(batch_size=100, delay=0.5):
         "errors": errors if errors else None
     }
 
-def create_user_from_sales_person(sales_person):
+def prepare_user_data(sales_person):
     email = sales_person.custom_email or f"{sales_person.name}@example.com"
     first_name = sales_person.custom_first_name or sales_person.name
     phone = sales_person.custom_mobile_no or ""
@@ -306,17 +434,9 @@ def create_user_from_sales_person(sales_person):
     if frappe.db.exists("User", email):
         frappe.throw(_("User with email {0} already exists").format(email))
     
-    user = frappe.new_doc("User")
-    user.update({
+    return {
         'email': email,
         'first_name': first_name,
         'username': username,
-        'phone': phone,
-        'send_welcome_email': 0,
-        'role_profile_name': 'Realtor',
-        'module_profile': None,
-        'user_type': 'Website User'
-    })
-    user.insert(ignore_permissions=True)
-    
-    return user
+        'phone': phone
+    }
