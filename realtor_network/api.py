@@ -391,7 +391,10 @@ def create_single_user(sales_person_name):
 
 def create_users_in_batch(batch_size=100, delay=0.1):
     sales_persons = frappe.get_all("Sales Person",
-        filters={"custom_user_id": ["in", ["", None]]},
+        filters={
+        "custom_user_id": ["in", ["", None]],
+        "is_group": 0
+        },
         fields=["name"],
         limit=batch_size
     )
