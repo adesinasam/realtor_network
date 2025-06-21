@@ -145,7 +145,7 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "Open\nOngoing\nCompleted\nCancelled"
+   "options": "Pre Launch Sales\nNow Selling\nSold Out\nSales Closed\nSales Closing Soon\nOngoing"
   },
   {
    "fieldname": "project_title",
