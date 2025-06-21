@@ -83,13 +83,15 @@
             <div class="header-title">
                <h4 class="card-title">{{ realtor_item.realtor_item_name or ''}}</h4>
             </div>
-            {% if realtor_item.status == 'Open' %}
+            {% if realtor_item.status == 'Pre Launch Sales' %}
             <span class="badge rounded-pill bg-primary">
-            {% elif realtor_item.status == 'Ongoing' %}
+            {% elif realtor_item.status == 'Now Selling' %}
             <span class="badge rounded-pill bg-info">
-            {% elif realtor_item.status == 'Completed' %}
+            {% elif realtor_item.status == 'Sold Out' %}
             <span class="badge rounded-pill bg-success">
-            {% elif realtor_item.status == 'Cancelled' %}
+            {% elif realtor_item.status == 'Sales Closing Soon' %}
+            <span class="badge rounded-pill bg-warning">
+            {% elif realtor_item.status == 'Sales Closed' %}
             <span class="badge rounded-pill bg-danger">
             {% endif %}
                 {{ realtor_item.status or '' }}
