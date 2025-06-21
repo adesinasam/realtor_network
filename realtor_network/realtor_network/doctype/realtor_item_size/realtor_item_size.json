@@ -27,7 +27,7 @@
    "fieldname": "outright",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Outright Purchase"
+   "label": "Selling Price"
   },
   {
    "fieldname": "column_break_erkk",
@@ -37,7 +37,7 @@
    "fieldname": "plans",
    "fieldtype": "Small Text",
    "in_list_view": 1,
-   "label": "Plans",
+   "label": "Payment Plans",
    "placeholder": "e.g. 6 months - N8,250,000 12 months - N9,000,000"
   }
  ],

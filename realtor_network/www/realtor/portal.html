@@ -99,8 +99,8 @@
         </div>
         <div class="card-body">
          <div class="d-grid gap-card grid-cols-1">
-           <a data-fslightbox="gallery_{{ realtor_item.name }}" href="{{ realtor_item.portal_image or 'assets/realtor_network/dist/images/icons/04.png'}}">
-            <img src="{{ realtor_item.portal_image or 'assets/realtor_network/dist/images/icons/04.png' }}" class="img-fluid bg-soft-info rounded" alt="{{ realtor_item.website_image_alt or 'portal_image' }}">
+           <a data-fslightbox="gallery_{{ realtor_item.name }}" href="{{ realtor_item.portal_image or realtor_item.default_image or '' }}">
+            <img src="{{ realtor_item.portal_image or realtor_item.default_image or '' }}" class="img-fluid bg-soft-info rounded" alt="{{ realtor_item.website_image_alt or 'portal_image' }}">
            </a>
          </div>
          <div class="mt-3">
@@ -115,8 +115,8 @@
                      <thead>
                         <tr>
                            <th></th>
-                           <th>Current Price</th>
-                           <th>Plans</th>
+                           <th>Selling Price</th>
+                           <th>Payment Plans</th>
                         </tr>
                      </thead>
                      <tbody>
