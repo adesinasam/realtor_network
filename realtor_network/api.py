@@ -118,6 +118,7 @@ def newrealtor_form(first_name, last_name, phone, email, confirm_email, dob=None
                 'first_name': first_name,
                 'last_name': last_name,
                 'phone': phone,
+                'username': referral_code,
                 'send_welcome_email': 1,
                 'role_profile_name': 'Realtor',
                 'module_profile': None,
