@@ -341,6 +341,7 @@ def prepare_user_data(sales_person):
 @frappe.whitelist()
 def get_realtors(custom_upline_1=None,custom_upline_2=None):
     filters = {}
+    filters['is_group'] = 0
     # if custom_upline_1:
     #     filters['custom_upline_1'] = custom_upline_1
     #     filters['custom_upline_2'] = custom_upline_2
