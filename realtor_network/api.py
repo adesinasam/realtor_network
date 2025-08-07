@@ -336,3 +336,17 @@ def prepare_user_data(sales_person):
         'username': username[:20],     # Truncate to 20 chars
         'phone': phone[:20]            # Truncate to 20 chars
     }
+
+
+@frappe.whitelist()
+def get_realtors(custom_upline_1=None,custom_upline_2=None):
+    filters = {}
+    # if custom_upline_1:
+    #     filters['custom_upline_1'] = custom_upline_1
+    #     filters['custom_upline_2'] = custom_upline_2
+    return frappe.get_all(
+        'Sales Person', 
+        filters=filters, 
+        fields=['custom_full_name', 'name', 'enabled', 'custom_referral_code', 'custom_upline_1', 'custom_upline_2', 
+        'custom_mobile_no', 'custom_email', 'custom_user_id','custom_is_company','custom_referral_code']
+        )
