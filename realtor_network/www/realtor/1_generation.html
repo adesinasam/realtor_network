@@ -14,18 +14,25 @@
                <div class="header-title">
                   <h5 class="card-title">Team Mates List</h5>
                </div>
+               <div class="">
+                  <h6>
+                  <span>All Team Mates: </span>
+                  <span> {{ team1_countactive }} </span>               
+                  </h6>
+               </div>
             </div>
             <div class="card-body px-0">
                <div class="table-responsive">
-                  <table id="user-list-table" class="table table-striped" role="grid" data-bs-toggle="data-table">
+                  <table id="datatable" class="table table-striped" data-toggle="data-table">
                      <thead>
                         <tr class="ligth">
+                           <th></th>
+                           <th>Date of Reg</th>
                            <th>Name</th>
                            <th>Mobile No</th>
                            <th>Email</th>
-                           <th>Commission</th>
+                           <!-- <th>Commission</th> -->
                            <th>Status</th>
-                           <th>Date of Reg</th>
 
                            <!-- <th style="min-width: 100px">Action</th> -->
 
@@ -35,10 +42,12 @@
                         {% if sales_persons %}
                          {% for sales_person in sales_persons %}
                         <tr>
+                           <td><span class="badge bg-primary rounded-circle">-</span></td>
+                           <td>{{ frappe.format_date(sales_person.creation, "dd/MM/yyyy") }}</td>
                            <td>{{ sales_person.custom_full_name }}</td>
                            <td>{{ sales_person.custom_mobile_no }}</td>
                            <td>{{ sales_person.custom_email }}</td>
-                           <td align="center">{{ sales_person.custom_commission_upline_1 }}%</td>
+                           <!-- <td align="center">{{ sales_person.custom_commission_upline_1 }}%</td> -->
                            <td>
                               {% if sales_person.enabled == 1 %}
                               <span class="badge bg-success">Active</span>
@@ -46,7 +55,6 @@
                               <span class="badge bg-danger">Inactive</span>
                               {% endif %}
                            </td>
-                           <td>{{ frappe.format_date(sales_person.creation, "dd/MM/yyyy") }}</td>
                            <!-- <td>
                               <div class="flex align-items-center list-user-action">
                                  <a class="btn btn-sm btn-icon btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Add" href="#">

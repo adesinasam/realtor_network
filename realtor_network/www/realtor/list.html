@@ -15,21 +15,26 @@
                <div class="header-title">
                   <h4 class="card-title">Realtors List</h4>
                </div>
+               <div class="">
+                  <div class=" text-center btn btn-light mt-lg-0 mt-md-0 mt-3">All Realtors: {{ realtor_count }} </div>
+                  <div class=" text-center btn btn-light mt-lg-0 mt-md-0 mt-3">Active Realtors: {{ realtor_countactive }} </div>
+               </div>
             </div>
             <div class="card-body px-0">
                <div class="table-responsive">
                   <table id="datatable" class="table table-striped" data-toggle="data-table">
                      <thead>
                         <tr>
+                           <th></th>
+                           <th>Date of Reg</th>
                            <th>Name</th>
                            <th>Referral Code</th>
                            <th>Email</th>
                            <th>Phone</th>
                            <th>Status</th>
-                           <th>1st Upline</th>
+                           <!-- <th>1st Upline</th>
                            <th>2nd Upline</th>
-                           <th>User ID</th>
-                           <th>Date of Reg</th>
+                           <th>User ID</th> -->
                            <th></th>
                         </tr>
                      </thead>
@@ -37,6 +42,8 @@
                         {% if realtors %}
                          {% for realtor in realtors %}
                          <tr>
+                           <td><span class="badge bg-primary rounded-circle">-</span></td>
+                           <td>{{ frappe.format_date(realtor.creation, "dd/MM/yyyy") }}</td>
                            <td>{{ realtor.custom_full_name }}</td>
                            <td>{{ realtor.custom_referral_code }}</td>
                            <td>{{ realtor.custom_email }}</td>
@@ -48,10 +55,9 @@
                               <span class="badge bg-warning rounded-pill">Inactive</span>
                               {% endif %}
                            </td>
-                           <td>{{ realtor.custom_upline_1 }}</td>
+                           <!-- <td>{{ realtor.custom_upline_1 }}</td>
                            <td>{{ realtor.custom_upline_2 }}</td>
-                           <td>{{ realtor.custom_user_id }}</td>
-                           <td>{{ frappe.format_date(realtor.creation, "dd/MM/yyyy") }}</td>
+                           <td>{{ realtor.custom_user_id }}</td> -->
                            <td>
                               <div class="flex align-items-center list-user-action">
                                  <a class="btn btn-sm btn-icon btn-soft-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="View" href="/realtor/view/{{ realtor.name }}">

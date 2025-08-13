@@ -187,7 +187,8 @@ def get_sales_person(custom_upline=None, upline=None):
         'Sales Person', 
         filters=filters, 
         fields=['sales_person_name', 'name', 'enabled', 'custom_full_name', 'custom_mobile_no',
-        'creation', 'custom_email', 'custom_commission_upline_1', 'custom_commission_upline_2']
+        'creation', 'custom_email', 'custom_upline_1', 'custom_upline_2'],
+        order_by='creation desc'
         )
 
 @frappe.whitelist(allow_guest=True)
@@ -339,7 +340,7 @@ def prepare_user_data(sales_person):
 
 
 @frappe.whitelist()
-def get_realtors(custom_upline_1=None,custom_upline_2=None):
+def get_realtors(custom_upline_1=None, custom_upline_2=None):
     filters = {}
     filters['is_group'] = 0
     # if custom_upline_1:
@@ -349,5 +350,6 @@ def get_realtors(custom_upline_1=None,custom_upline_2=None):
         'Sales Person', 
         filters=filters, 
         fields=['custom_full_name', 'name', 'enabled', 'custom_referral_code', 'custom_upline_1', 'custom_upline_2', 
-        'custom_mobile_no', 'custom_email', 'custom_user_id','custom_is_company','custom_referral_code']
-        )
+        'custom_mobile_no', 'custom_email', 'custom_user_id', 'custom_is_company', 'custom_referral_code', 'creation'],
+        order_by='creation desc'
+    )
