@@ -44,7 +44,7 @@
                          <tr>
                            <td><span class="badge bg-primary rounded-circle">-</span></td>
                            <td>{{ frappe.format_date(realtor.creation, "dd/MM/yyyy") }}</td>
-                           <td>{{ realtor.custom_full_name }}</td>
+                           <td><a href="/app/sales-person/{{ realtor.name }}">{{ realtor.custom_full_name }}</a></td>
                            <td>{{ realtor.custom_referral_code }}</td>
                            <td>{{ realtor.custom_email }}</td>
                            <td>{{ realtor.custom_mobile_no }}</td>
