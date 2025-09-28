@@ -43,4 +43,11 @@ def get_context(context):
 
     context.banks= frappe.call('realtor_network.api.get_bank')
 
+    # Fetch courses based on the selected section, if any
+    error = frappe.form_dict.get('error')
+    if error:
+        context.error = error
+    else:
+        context.error = None
+
     return context

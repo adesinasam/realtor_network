@@ -1,0 +1,183 @@
+{% extends "templates/layout.html" %}
+
+{%- block title -%}
+{{_("Edit")}}
+{%- endblock -%}
+
+
+{% block content %}
+<div class="conatiner-fluid content-inner mt-n5 py-0">
+         <div class="row">
+            <div class="col-xl-3 col-lg-4">
+               <div class="card">
+                  <div class="card-header d-flex justify-content-between">
+                     <div class="header-title">
+                        <h4 class="card-title">User</h4>
+                     </div>
+                  </div>
+                  <div class="card-body">
+                        <div class="form-group">
+                           <div class="profile-img-edit position-relative">
+                             {% if sales_person_user.user_image  %}
+                              <img src="{{ sales_person_user.user_image }}" title="{{  sales_person_user.full_name }}" alt="profile-pic" class="theme-color-default-img profile-pic rounded avatar-100">
+                             {% else %}
+                              <img src="assets/realtor_network/dist/images/avatars/01.png" alt="profile-pic" class="theme-color-default-img profile-pic rounded avatar-100">
+                             {% endif %}
+                           </div>
+                           <div class="img-extension mt-3">
+                              <div class="d-inline-block align-items-center">
+                                 {% if realtor_doc.enabled == 1 %}
+                                 <span class="badge bg-primary">Active</span>
+                                 {% else %}
+                                 <span class="badge bg-warning">Inactive</span>
+                                 {% endif %}                     
+                              </div>
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <label class="form-label">Full Name:</label>
+                           <p>{{ realtor_doc.custom_full_name }}</p>
+                        </div>
+                        <div class="form-group">
+                           <label class="form-label">Referral Code:</label>
+                           <p>{{ realtor_doc.custom_referral_code }}</p>
+                        </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-xl-9 col-lg-8">
+               <div class="card">
+                  <div class="card-header d-flex justify-content-between">
+                     <div class="header-title">
+                        <h4 class="card-title">User Information</h4>
+                     </div>
+                  </div>
+                  <div class="card-body">
+                     <div class="new-user-info">
+                        {% if success %}
+                           <div id="alerts-disimissible-component">
+                            <div class="alert alert-left alert-success alert-dismissible fade show" role="alert">
+                             <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                               <path d="M5.94118 10.7474V20.7444C5.94118 21.0758 5.81103 21.3936 5.57937 21.628C5.3477 21.8623 5.0335 21.994 4.70588 21.994H2.23529C1.90767 21.994 1.59347 21.8623 1.36181 21.628C1.13015 21.3936 1 21.0758 1 20.7444V11.997C1 11.6656 1.13015 11.3477 1.36181 11.1134C1.59347 10.879 1.90767 10.7474 2.23529 10.7474H5.94118ZM5.94118 10.7474C7.25166 10.7474 8.50847 10.2207 9.43512 9.28334C10.3618 8.34594 10.8824 7.07456 10.8824 5.74887V4.49925C10.8824 3.83641 11.1426 3.20071 11.606 2.73201C12.0693 2.26331 12.6977 2 13.3529 2C14.0082 2 14.6366 2.26331 15.0999 2.73201C15.5632 3.20071 15.8235 3.83641 15.8235 4.49925V10.7474H19.5294C20.1847 10.7474 20.8131 11.0107 21.2764 11.4794C21.7397 11.9481 22 12.5838 22 13.2466L20.7647 19.4947C20.5871 20.2613 20.25 20.9196 19.8045 21.3704C19.3589 21.8211 18.8288 22.04 18.2941 21.994H9.64706C8.6642 21.994 7.72159 21.599 7.0266 20.896C6.33162 20.1929 5.94118 19.2394 5.94118 18.2451" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                             </svg>
+                             <strong>Success!</strong> {{ success or "" }}!
+                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"> </button>
+                            </div>
+                           </div>
+                        {% endif %}
+                        {% if error %}
+                           <div id="alerts-disimissible-component">
+                            <div class="alert alert-left alert-danger alert-dismissible fade show" role="alert">
+                              <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M4.81409 20.4368H19.1971C20.7791 20.4368 21.7721 18.7267 20.9861 17.3527L13.8001 4.78775C13.0091 3.40475 11.0151 3.40375 10.2231 4.78675L3.02509 17.3518C2.23909 18.7258 3.23109 20.4368 4.81409 20.4368Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                 <path d="M12.0024 13.4147V10.3147" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                 <path d="M11.995 16.5H12.005" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                              </svg>
+                              <strong>Error!</strong> {{ error or "" }}!
+                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"> </button>
+                            </div>
+                           </div>
+                        {% endif %}
+                        <form action="/api/method/realtor_network.api.update_realtor_form" id="userForm" method="post">
+                           <input type="hidden" value="{{frappe.session.csrf_token}}" name="csrf_token">
+                           <input type="hidden" name="initial_url" value="{{ frappe.request.url }}">
+                           <input type="hidden" name="name" value="{{ realtor_doc.name or ''  }}">
+                           <input type="hidden" name="custom_user_id" value="{{ realtor_doc.custom_user_id or ''  }}">
+                           <div class="row">
+                              <div class="form-group col-md-4">
+                                 <label class="form-label" for="fname">First Name:</label>
+                                 <input type="hidden" class="form-control" name="first_name" value="{{ realtor_doc.custom_first_name or ''  }}" pattern="[A-Za-z ]+" title="Only letters allowed" readonly>
+                                 <p>{{ realtor_doc.custom_first_name or "" }}</p>
+                              </div>
+                              <div class="form-group col-md-4">
+                                 <label class="form-label" for="lname">Last Name:</label>
+                                 <input type="hidden" class="form-control" name="last_name" value="{{ realtor_doc.custom_last_name or ''  }}" pattern="[A-Za-z ]+" title="Only letters allowed" readonly>
+                                 <p>{{ realtor_doc.custom_last_name or "" }}</p>
+                              </div>
+                              <div class="form-group col-md-4">
+                                 <label class="form-label" for="add1">Email Address:</label>
+                                 <input type="hidden" class="form-control" name="email" value="{{ realtor_doc.custom_email or ''  }}" readonly>
+                                 <p>{{ realtor_doc.custom_email or "" }}</p>
+                              </div>
+                              <div class="form-group col-md-4">
+                                 <label class="form-label" for="add2">Phone No:</label>
+                                 <input type="text" class="form-control" name="phone" value="{{ realtor_doc.custom_mobile_no or '' }}" required pattern="[0-9+]{9,15}" title="9-15 digit phone number">
+                              </div>
+                              <div class="form-group col-md-4">
+                                 <label class="form-label" for="add2">Date of Birth:</label>
+                                 <input type="date" class="form-control" name="dob" value="{{ realtor_doc.custom_dob or ''  }}" max="{{ frappe.utils.getdate().strftime('%Y-%m-%d') }}">
+                              </div>
+                              <div class="form-group col-md-4">
+                                 <label class="form-label" for="add2">Gender:</label>
+                                 <select class="form-select mb-3 shadow-none" name="gender">
+                                    <option selected value="{{ realtor_doc.custom_gender or ''  }}">{{ realtor_doc.custom_gender or "" }}</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                 </select>
+                              </div>
+                              <div class="form-group col-md-12">
+                                 <label class="form-label" for="cname">Address:</label>
+                                 <input type="text" class="form-control" name="address" value="{{ realtor_doc.custom_address or '' }}">
+                                 <p></p>
+                              </div>
+                              <div class="form-group col-md-4">
+                                 <label class="form-label" for="add1">City:</label>
+                                 <input type="text" class="form-control" name="city" value="{{ realtor_doc.custom_city or '' }}">
+                              </div>
+                              <div class="form-group col-md-4">
+                                 <label class="form-label" for="add2">State:</label>
+                                 <input type="text" class="form-control" name="state" value="{{ realtor_doc.custom_state or '' }}" pattern="[A-Za-z ]+" title="Only letters allowed">
+                              </div>
+                              <div class="form-group col-sm-4">
+                                 <label class="form-label">Country:</label>
+                                 <select class="form-select mb-3 shadow-none" name="country" required>
+                                    <option selected value="{{ realtor_doc.custom_country or '' }}">{{ realtor_doc.custom_country or "" }}</option>
+                                    {% for country in countrys %}
+                                    <option value="{{ country.name }}">{{ country.name }}</option>
+                                    {% endfor %}
+                                 </select>
+                                 <p></p>
+                              </div>
+                              <!-- <div class="form-group col-md-12">
+                                 <label class="form-label" for="pass">User Login ID:</label>
+                                 <p>{{ realtor_doc.custom_user_id }}</p>
+                              </div> -->
+                           </div>
+                           <hr>
+                           <hr>
+                           <h5 class="mb-3">Bank Details</h5>
+                           <div class="row">
+                              <div class="form-group col-md-12">
+                                 <label class="form-label" for="uname">Account Name:</label>
+                                 <input type="text" class="form-control" name="accountname" value="{{ realtor_doc.custom_account_name or '' }}">
+                              </div>
+                              <div class="form-group col-md-6">
+                                 <label class="form-label" for="pass">Account No:</label>
+                                 <input type="text" class="form-control" name="accountno" value="{{ realtor_doc.custom_account_no or '' }}" pattern="[0-9]{10}" title="Account number must be exactly 10 digits">
+                              </div>
+                              <div class="form-group col-md-6">
+                                 <label class="form-label" for="rpass">Bank:</label>
+                                 <select class="form-select mb-3 shadow-none" name="bank">
+                                    <option  selected value="{{ realtor_doc.custom_bank or '' }}">{{ realtor_doc.custom_bank or "" }}</option>
+                                    {% for bank in banks %}
+                                    <option value="{{ bank.name }}">{{ bank.name }}</option>
+                                    {% endfor %}
+                                 </select>
+                              </div>
+                           </div>
+                           <!-- <div class="checkbox">
+                              <label class="form-label"><input class="form-check-input me-2" type="checkbox" value="1" id="flexCheckChecked" readonly>Enable Two-Factor-Authentication</label>
+                           </div> -->
+                              <div class="d-grid gap-2 col-6 mx-auto">
+                                 <button type="submit" class="btn btn-outline-primary rounded-pill">Save</button>
+                              </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+</div>
+{% endblock %}
+

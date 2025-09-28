@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"-K5jF_XVgb\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Realtor Network</span>\",\"col\":12}},{\"id\":\"YsqBLn7tKM\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h5\\\"><b>PORTAL</b></span>\",\"col\":12}},{\"id\":\"plDprXB-h8\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Realtor Network Portal Page\",\"col\":3}},{\"id\":\"vhVRim2HyL\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"ZdE0QkzevQ\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h5\\\"><b>META</b></span>\",\"col\":12}},{\"id\":\"2mSkEX4UaQ\",\"type\":\"card\",\"data\":{\"card_name\":\"Realtor\",\"col\":4}},{\"id\":\"a-1hDBd0oW\",\"type\":\"card\",\"data\":{\"card_name\":\"Settings\",\"col\":4}}]",
+ "content": "[{\"id\":\"-K5jF_XVgb\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Realtor Network</span>\",\"col\":12}},{\"id\":\"PcTty28CWS\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Realtors List\",\"col\":4}},{\"id\":\"WfRIahAwub\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Active Realtors\",\"col\":4}},{\"id\":\"YsqBLn7tKM\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h5\\\"><b>PORTAL</b></span>\",\"col\":12}},{\"id\":\"plDprXB-h8\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Realtor Network Portal Page\",\"col\":3}},{\"id\":\"vhVRim2HyL\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"ZdE0QkzevQ\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h5\\\"><b>META</b></span>\",\"col\":12}},{\"id\":\"2mSkEX4UaQ\",\"type\":\"card\",\"data\":{\"card_name\":\"Realtor\",\"col\":4}},{\"id\":\"a-1hDBd0oW\",\"type\":\"card\",\"data\":{\"card_name\":\"Settings\",\"col\":4}}]",
  "creation": "2025-05-30 11:39:14.922969",
  "custom_blocks": [],
  "docstatus": 0,
@@ -54,7 +54,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Portal Property Listing",
+   "label": "Realtor Item",
    "link_count": 0,
    "link_to": "Realtor Item",
    "link_type": "DocType",
@@ -62,11 +62,20 @@
    "type": "Link"
   }
  ],
- "modified": "2025-06-09 12:41:41.132522",
+ "modified": "2025-09-03 05:36:35.106487",
  "modified_by": "Administrator",
  "module": "Realtor Network",
  "name": "Realtor Network",
- "number_cards": [],
+ "number_cards": [
+  {
+   "label": "Realtors List",
+   "number_card_name": "Realtors List"
+  },
+  {
+   "label": "Active Realtors",
+   "number_card_name": "Active Realtors"
+  }
+ ],
  "owner": "Administrator",
  "parent_page": "",
  "public": 1,

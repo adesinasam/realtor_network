@@ -67,7 +67,7 @@ def get_context(context):
 
     # Navigation
     context.active_route = "Realtors"
-    context.active_subroute = "View"
+    context.active_subroute = "Edit"
 
     # API calls with error handling
     try:
@@ -87,5 +87,18 @@ def get_context(context):
     except Exception as e:
         context.banks = []
         frappe.log_error(f"Error getting banks: {str(e)}")
+
+    # Fetch courses based on the selected section, if any
+    success = frappe.form_dict.get('success')
+    if success:
+        context.success = success
+    else:
+        context.success = None
+
+    error = frappe.form_dict.get('error')
+    if error:
+        context.error = error
+    else:
+        context.error = None
 
     return context

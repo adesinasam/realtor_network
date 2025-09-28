@@ -80,7 +80,8 @@ website_route_rules = [
     {"from_route": "/realtor/newrealtor/<docname>", "to_route": "realtor/newrealtor"},
     {"from_route": "/confirm_email/<docname>", "to_route": "realtor/confirm_email"},
     {"from_route": "/realtor/confirm_email/<docname>", "to_route": "realtor/confirm_email"},
-    {"from_route": "/realtor/view/<docname>", "to_route": "realtor/view"}
+    {"from_route": "/realtor/view/<docname>", "to_route": "realtor/view"},
+    {"from_route": "/realtor/edit/<docname>", "to_route": "realtor/edit"}
 ]
 
 

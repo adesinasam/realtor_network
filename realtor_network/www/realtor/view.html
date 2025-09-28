@@ -18,13 +18,17 @@
                   <div class="card-body">
                         <div class="form-group">
                            <div class="profile-img-edit position-relative">
+                             {% if sales_person_user.user_image  %}
+                              <img src="{{ sales_person_user.user_image }}" title="{{  sales_person_user.full_name }}" alt="profile-pic" class="theme-color-default-img profile-pic rounded avatar-100">
+                             {% else %}
                               <img src="assets/realtor_network/dist/images/avatars/01.png" alt="profile-pic" class="theme-color-default-img profile-pic rounded avatar-100">
-                              <div class="upload-icone bg-primary">
+                             {% endif %}
+                              <!-- <div class="upload-icone bg-primary">
                                  <svg class="upload-button icon-14" width="14"  viewBox="0 0 24 24">
                                     <path fill="#ffffff" d="M14.06,9L15,9.94L5.92,19H5V18.08L14.06,9M17.66,3C17.41,3 17.15,3.1 16.96,3.29L15.13,5.12L18.88,8.87L20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18.17,3.09 17.92,3 17.66,3M14.06,6.19L3,17.25V21H6.75L17.81,9.94L14.06,6.19Z" />
                                  </svg>
                                  <input class="file-upload" type="file" accept="image/*">
-                              </div>
+                              </div> -->
                            </div>
                            <div class="img-extension mt-3">
                               <div class="d-inline-block align-items-center">
@@ -44,6 +48,7 @@
                            <label class="form-label">Referral Code:</label>
                            <p>{{ realtor_doc.custom_referral_code }}</p>
                         </div>
+                        <a href="/realtor/edit/{{ realtor_doc.name }}"><button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">Edit</button></a>
                   </div>
                </div>
             </div>
@@ -59,43 +64,43 @@
                            <div class="row">
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="fname">First Name:</label>
-                                 <p>{{ realtor_doc.custom_first_name }}</p>
+                                 <p>{{ realtor_doc.custom_first_name or "" }}</p>
                               </div>
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="lname">Last Name:</label>
-                                 <p>{{ realtor_doc.custom_last_name }}</p>
+                                 <p>{{ realtor_doc.custom_last_name or "" }}</p>
                               </div>
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="add1">Email Address:</label>
-                                 <p>{{ realtor_doc.custom_email }}</p>
+                                 <p>{{ realtor_doc.custom_email or "" }}</p>
                               </div>
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="add2">Phone No:</label>
-                                 <p>{{ realtor_doc.custom_mobile_no }}</p>
+                                 <p>{{ realtor_doc.custom_mobile_no or "" }}</p>
                               </div>
                               <div class="form-group col-md-12">
                                  <label class="form-label" for="cname">Address:</label>
-                                 <p>{{ realtor_doc.custom_address }}</p>
+                                 <p>{{ realtor_doc.custom_address or "" }}</p>
                               </div>
                               <div class="form-group col-md-4">
                                  <label class="form-label" for="add1">City:</label>
-                                 <p>{{ realtor_doc.custom_city }}</p>
+                                 <p>{{ realtor_doc.custom_city or "" }}</p>
                               </div>
                               <div class="form-group col-md-4">
                                  <label class="form-label" for="add2">State:</label>
-                                 <p>{{ realtor_doc.custom_state }}</p>
+                                 <p>{{ realtor_doc.custom_state or "" }}</p>
                               </div>
                               <div class="form-group col-sm-4">
                                  <label class="form-label">Country:</label>
-                                 <p>{{ realtor_doc.custom_country }}</p>
+                                 <p>{{ realtor_doc.custom_country or "" }}</p>
                               </div>
-                              <div class="form-group col-md-6">
+                              <!-- <div class="form-group col-md-6">
                                  <label class="form-label" for="altconno">Alternate Contact:</label>
 
-                              </div>
+                              </div> -->
                               <div class="form-group col-md-12">
                                  <label class="form-label" for="pass">User Login ID:</label>
-                                 <p>{{ realtor_doc.custom_user_id }}</p>
+                                 <p>{{ realtor_doc.custom_user_id or "" }}</p>
                               </div>
                            </div>
                            <hr>
@@ -103,11 +108,11 @@
                            <div class="row">
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="uname">Direct Upline:</label>
-                                 <p>{{ realtor_doc.custom_upline_1 }}</p>
+                                 <p>{{ realtor_doc.custom_upline_1 or "" }}</p>
                               </div>
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="uname">2nd Upline:</label>
-                                 <p>{{ realtor_doc.custom_upline_2 }}</p>
+                                 <p>{{ realtor_doc.custom_upline_2 or "" }}</p>
                               </div>
                            </div>
                            <hr>
@@ -115,20 +120,17 @@
                            <div class="row">
                               <div class="form-group col-md-12">
                                  <label class="form-label" for="uname">Account Name:</label>
-
+                                 <p>{{ realtor_doc.custom_account_name or "" }}</p>
                               </div>
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="pass">Account No:</label>
-
+                                 <p>{{ realtor_doc.custom_account_no or "" }}</p>
                               </div>
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="rpass">Bank:</label>
-
+                                 <p>{{ realtor_doc.custom_bank or "" }}</p>
                               </div>
                            </div>
-                           <!-- <div class="checkbox">
-                              <label class="form-label"><input class="form-check-input me-2" type="checkbox" value="1" id="flexCheckChecked" readonly>Enable Two-Factor-Authentication</label>
-                           </div> -->
                      </div>
                   </div>
                </div>

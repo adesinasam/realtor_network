@@ -169,6 +169,73 @@ def success_response(redirect_url, referral_code):
     frappe.local.response["location"] = "/confirm_email/" + referral_code
 
 @frappe.whitelist(allow_guest=True)
+def update_realtor_form(name, phone, dob=None, address=None, gender=None, 
+                                city=None, state=None, country=None, accountno=None, 
+                                accountname=None, bank=None, initial_url=None):
+    """Update existing realtor record with given name (complete version)"""
+    
+    # Validate required fields
+    required_fields = {
+        'Name': name,
+        'Phone': phone
+    }
+    
+    missing_fields = [field for field, value in required_fields.items() if not value]
+    if missing_fields:
+        return error_response(initial_url, f"Missing required fields: {', '.join(missing_fields)}")
+    
+    # Check if record exists
+    if not frappe.db.exists("Sales Person", name):
+        return error_response(initial_url, f"Realtor record with name '{name}' not found")
+    
+    try:
+        # Get the existing document
+        sales_person = frappe.get_doc("Sales Person", name)
+        
+        # Update fields
+        update_data = {
+            'custom_mobile_no': phone,
+            'custom_dob': dob,
+            'custom_address': address,
+            'custom_gender': gender,
+            'custom_city': city,
+            'custom_state': state,
+            'custom_country': country,
+            'custom_account_no': accountno,
+            'custom_account_name': accountname,
+            'custom_bank': bank
+        }
+        
+        # Remove None values if you want to keep existing values when not provided
+        update_data = {k: v for k, v in update_data.items() if v is not None}
+        
+        sales_person.update(update_data)
+        
+        # Save the changes
+        sales_person.save(ignore_permissions=True)
+        frappe.db.commit()
+        
+        return success_update_response(initial_url, f"Record {name} updated successfully")
+        
+    except frappe.ValidationError as e:
+        frappe.db.rollback()
+        return error_response(initial_url, f"Validation error: {str(e)}")
+    except Exception as e:
+        frappe.db.rollback()
+        frappe.log_error(
+            title="Realtor Update Failed",
+            message=frappe.get_traceback()
+        )
+        return error_response(
+            initial_url,
+            "Update failed. Please try again or contact support."
+        )
+
+def success_update_response(redirect_url, message):
+    frappe.local.response["type"] = "redirect"
+    frappe.local.response["location"] = redirect_url + "?success=" + frappe.utils.quote(message)
+
+@frappe.whitelist(allow_guest=True)
 def get_country():
     country = frappe.get_all('Country', fields=['name', 'code'])
     return country

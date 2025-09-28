@@ -240,10 +240,7 @@
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    {% if "Sales User" in user_roles %}
                     <li><a class="dropdown-item" {% if realtor %} href="/realtor/view/{{ realtor.name }}" {% else %} href="/me" {% endif %}>My Profile</a></li>
-                    {% endif %}
-                    <li><a class="dropdown-item" href="/update-profile/{{ current_user.name }}">My Settings</a></li>
                     {% if "Sales User" in user_roles %}
                     <li><a class="dropdown-item" href="/apps">Apps</a></li>
                     {% endif %}
